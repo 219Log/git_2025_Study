@@ -1,0 +1,762 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>기술분석 설문제작 시스템</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1f7336a6-9612-809d-9286-d7dd426dff92" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/checkmark-square_red.svg"/></div><h1 class="page-title">기술분석 설문제작 시스템</h1><p class="page-description"></p></header><div class="page-body"><h1 id="1f7336a6-9612-8080-a936-d4469d618b03" class=""><strong>설문 제작 시스템 구현 기술 분석</strong></h1><h2 id="1f7336a6-9612-801b-9391-c7eacf2cdcb6" class=""><strong>🔧 핵심 기술 스택</strong></h2><ul id="1f7336a6-9612-8032-8f41-f66dd2c719e2" class="bulleted-list"><li style="list-style-type:disc"><strong>jQuery</strong>: DOM 조작 및 이벤트 처리의 주요 도구</li></ul><ul id="1f7336a6-9612-8012-b46b-ccbca7631566" class="bulleted-list"><li style="list-style-type:disc"><strong>jQuery UI</strong>: sortable 기능으로 드래그 앤 드롭 구현</li></ul><ul id="1f7336a6-9612-8049-b407-e0dae3c5bc37" class="bulleted-list"><li style="list-style-type:disc"><strong>JavaScript(ES5)</strong>: 객체 지향 패턴과 클로저 활용</li></ul><ul id="1f7336a6-9612-8090-a430-ce2b685a0cae" class="bulleted-list"><li style="list-style-type:disc"><strong>JSP</strong>: 서버 측 템플릿 엔진으로 동적 HTML 생성</li></ul><ul id="1f7336a6-9612-804a-b3f1-f94894a74abf" class="bulleted-list"><li style="list-style-type:disc"><strong>AJAX</strong>: 비동기 데이터 통신 구현</li></ul><h2 id="1f7336a6-9612-804b-8942-cc9a313a1f58" class=""><strong>📋 HTML 템플릿 생성 방식</strong></h2><p id="1f7336a6-9612-8000-add2-fa162b4fd66f" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f7336a6-9612-80bf-bfa8-c473e1777a16" class="code"><code class="language-JavaScript">template = &#x27;&lt;div class=&quot;re_wr_box&quot;&gt;&#x27; 
++ &#x27;&lt;div class=&quot;choice_sel_box&quot;&gt;&#x27;
++ &#x27;&lt;div class=&quot;choice_sel&quot;&gt;&#x27; // ... 많은 문자열 연결 ...
++ &#x27;&lt;/div&gt;&#x27; + &#x27;&lt;/div&gt;&#x27; + &#x27;&lt;/div&gt;&#x27;;</code></pre><ul id="1f7336a6-9612-8011-9761-ec487b6ec96e" class="bulleted-list"><li style="list-style-type:disc">문자열 연결(+)로 대규모 HTML 템플릿 구성</li></ul><ul id="1f7336a6-9612-8023-bd6a-cd5c60c2fb35" class="bulleted-list"><li style="list-style-type:disc">jQuery의 $(template)로 문자열을 DOM 객체로 변환</li></ul><ul id="1f7336a6-9612-80a3-b5a8-dcd5bb319cca" class="bulleted-list"><li style="list-style-type:disc">.append()로 생성된 요소를 문서에 삽입</li></ul><h2 id="1f7336a6-9612-80a0-a6d4-c9edb9340ecf" class=""><strong>🖱️ 이벤트 처리 구현</strong></h2><p id="1f7336a6-9612-8065-b8fd-d1fab5760d33" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f7336a6-9612-80cb-8da7-dbfc3684a37b" class="code"><code class="language-JavaScript">$(document).on(&#x27;click&#x27;, &#x27;.delete-box&#x27;
+, function() { 
+	// 이벤트 처리 로직
+});</code></pre><ul id="1f7336a6-9612-809c-90d7-c484cbef1b9c" class="bulleted-list"><li style="list-style-type:disc"><strong>이벤트 위임 패턴</strong>: 동적 생성 요소에 이벤트 바인딩</li></ul><ul id="1f7336a6-9612-80c1-ae28-c5849e1126c1" class="bulleted-list"><li style="list-style-type:disc"><strong>네임스페이스 이벤트</strong>: .off().on()으로 이벤트 중복 방지</li></ul><ul id="1f7336a6-9612-8064-b685-efeb982aa1a0" class="bulleted-list"><li style="list-style-type:disc"><strong>콜백 함수</strong>: 익명 함수로 이벤트 핸들러 구현</li></ul><h2 id="1f7336a6-9612-8013-bd5a-d9aa642ef33e" class=""><strong>🔄 UI 컴포넌트 동적 관리</strong></h2><p id="1f7336a6-9612-8002-9a46-cd5c6988030d" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f7336a6-9612-808f-aad4-eb64c97d4f64" class="code"><code class="language-JavaScript">function fn_generateCheckboxLimitOptions(select, totalOptions) {
+	 select.innerHTML = &#x27;&#x27;; // 기존 옵션 초기화 
+	for (let i = 1; i &lt;= totalOptions; i++) { 
+			const option = document.createElement(&#x27;option&#x27;); 
+			// option 구성 
+			select.appendChild(option); 
+	}
+}</code></pre><ul id="1f7336a6-9612-806d-8d51-f8f32b6aeb93" class="bulleted-list"><li style="list-style-type:disc"><strong>DOM API</strong>: 직접 요소 생성 및 속성 설정</li></ul><ul id="1f7336a6-9612-801b-9d59-d40e60709fcb" class="bulleted-list"><li style="list-style-type:disc"><strong>상태 관리</strong>: 이전 선택값 보존하며 요소 재구성</li></ul><ul id="1f7336a6-9612-808e-93d4-c65a0278d28c" class="bulleted-list"><li style="list-style-type:disc"><strong>조건부 렌더링</strong>: 질문 유형에 따른 다른 UI 구성</li></ul><h2 id="1f7336a6-9612-804e-8f02-d4691906cf23" class=""><strong>📊 데이터 수집 및 구조화</strong></h2><p id="1f7336a6-9612-80c3-b7fc-dbdc5d506f20" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f7336a6-9612-80e0-b3b7-ffab622deb38" class="code"><code class="language-JavaScript">var rspnsArtclList = [];
+$(&quot;[id^=useYn&quot;).each(function() { 
+	// 데이터 수집 및 객체 생성 
+	rspnsArtclList.push({ 
+			pbancNo: pbancNo, 
+			// 기타 속성들 
+	});
+});</code></pre><ul id="1f7336a6-9612-8059-9787-e6feb324ef5e" class="bulleted-list"><li style="list-style-type:disc"><strong>선택자 기반 순회</strong>: jQuery로 관련 요소 모두 선택</li></ul><ul id="1f7336a6-9612-8058-a21b-e4645b23175b" class="bulleted-list"><li style="list-style-type:disc"><strong>객체 리터럴</strong>: 키-값 쌍으로 데이터 객체 구성</li></ul><ul id="1f7336a6-9612-8007-b932-f49ee7668b35" class="bulleted-list"><li style="list-style-type:disc"><strong>배열 메서드</strong>: .push()로 수집된 객체 저장</li></ul><h2 id="1f7336a6-9612-8077-b39a-c3d7c8f73128" class=""><strong>📡 AJAX 통신 구현</strong></h2><p id="1f7336a6-9612-800c-978f-f5774f07d225" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f7336a6-9612-8045-8057-ec6ac311cac1" class="code"><code class="language-JavaScript">$.ajax(
+	{ url: &#x27;&lt;c:url value=&quot;/survey/onlnRcpt/addRspnsArtclStngSave.do&quot;/&gt;&#x27;
+	, type: &#x27;POST&#x27;
+	, data: JSON.stringify(requestData)
+	, contentType: &#x27;application/json&#x27;
+	, dataType: &#x27;json&#x27;
+	, success: function(response) { 
+	// 성공 처리 
+	}
+});</code></pre><ul id="1f7336a6-9612-8086-bb06-da3e03f97aae" class="bulleted-list"><li style="list-style-type:disc"><strong>JSON 직렬화</strong>: JSON.stringify()로 객체를 문자열로 변환</li></ul><ul id="1f7336a6-9612-808a-9288-da506b3e78ab" class="bulleted-list"><li style="list-style-type:disc"><strong>콘텐츠 타입</strong>: &#x27;application/json&#x27;으로 JSON 데이터 전송</li></ul><ul id="1f7336a6-9612-80f0-8ea2-eb542200939f" class="bulleted-list"><li style="list-style-type:disc"><strong>프로미스 패턴</strong>: 성공/실패 콜백으로 비동기 처리</li></ul><h2 id="1f7336a6-9612-8038-92bf-f51d9ccea276" class=""><strong>🔍 유효성 검증 구현</strong></h2><p id="1f7336a6-9612-8072-a19f-ff8f48134631" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f7336a6-9612-80ab-bec4-f3d7e79b3e6c" class="code"><code class="language-JavaScript">if (qitemCn == &#x27;&#x27;) { 
+	hasEmptyQuestion = true; 
+if (!$emptyQuestionBox) { 
+	$emptyQuestionBox = $box; 
+}}</code></pre><ul id="1f7336a6-9612-800e-a3cc-c239f1f42145" class="bulleted-list"><li style="list-style-type:disc"><strong>플래그 변수</strong>: 검증 상태 추적을 위한 불리언 변수</li></ul><ul id="1f7336a6-9612-800f-9400-c88cd046dd36" class="bulleted-list"><li style="list-style-type:disc"><strong>참조 저장</strong>: 첫 번째 오류 요소 참조 보관</li></ul><ul id="1f7336a6-9612-801a-8216-c3912d8c6dc9" class="bulleted-list"><li style="list-style-type:disc"><strong>사용자 피드백</strong>: alert()와 focus()로 오류 알림</li></ul><p id="1f7336a6-9612-8045-be0c-e6560e464422" class="">
+</p><p id="1f7336a6-9612-8059-9b02-e302edb4e215" class="">이 시스템은 복잡한 웹 폼의 동적 생성과 관리를 위해 jQuery와 바닐라 JavaScript를 결합한 전통적인 웹 애플리케이션 구현 방식을 보여줍니다. DOM 조작과 이벤트 처리를 통해 풍부한 사용자 경험을 제공하면서, AJAX를 활용해 서버와의 효율적인 통신을 구현했습니다.</p><p id="1f7336a6-9612-8083-b507-d5d5151a4631" class="">
+</p><hr id="1f7336a6-9612-8071-b30e-dc047c777dfc"/><hr id="1f7336a6-9612-8098-82df-d38935b49008"/><hr id="1f7336a6-9612-8057-870e-c01f82dbc909"/><p id="1f7336a6-9612-8064-9484-ea0d4a5a7df6" class="">
+</p><p id="1f7336a6-9612-806e-92b2-f79b0f696057" class="">
+</p><p id="1f7336a6-9612-8015-b829-dd45d6e1ae09" class="">
+</p><p id="1f7336a6-9612-80f5-b7c1-db4a11be8f65" class="">클로저란?<br/>클로저는 함수가 자신이 생성된 환경(변수들)을 기억하고 접근할 수 있는 JavaScript의 핵심 메커니즘입니다:<br/></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f7336a6-9612-80c0-a017-c1a53f4e9860" class="code"><code class="language-JavaScript">// 클로저 예시 1: 이벤트 핸들러에서 외부 변수 사용
+$(document).on(&#x27;click&#x27;, &#x27;.app_btn&#x27;, function() {
+    // 외부에서 선언된 fn_addNewQuestionBox 함수 접근
+    const $newBox = $(fn_addNewQuestionBox(&#x27;subjective&#x27;)); 
+    // 함수 종료 후에도 $newBox 변수 유지 및 사용
+    $newBox.find(&#x27;.question-title&#x27;).focus();
+});
+
+// 클로저 예시 2: 각 반복에서 생성된 환경 유지
+$(&#x27;.re_wr_box&#x27;).each(function() {
+    var $box = $(this);  // 각 반복마다 다른 $box
+    
+    // 이 이벤트 핸들러는 자신의 $box를 &quot;기억&quot;
+    $box.find(&#x27;.delete-box&#x27;).click(function() {
+        $box.remove();  // 클릭 시 자신의 부모 박스 제거
+    });
+});</code></pre><p id="1f7336a6-9612-80b9-be08-c83ede8a6b6a" class="">
+</p><p id="1f7336a6-9612-8097-bdb3-e1729833e39d" class="">
+</p><p id="1f7336a6-9612-806e-902c-fdcf176e3779" class="">객체 지향 패턴이란?<br/>코드에서 객체 지향 패턴은 데이터와 기능을 논리적 단위로 구조화하는 방식을 말합니다. ES5에서는 class 키워드가 없었지만, 다음과 같은 방식으로 구현했습니다:<br/></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f7336a6-9612-806f-9481-faef5c638a58" class="code"><code class="language-JavaScript">// 1. 객체 리터럴 패턴 - 데이터 구조화
+var questionData = {
+    qiteid: qiteid,
+    pbancNo: pbancNo,
+    type: type,
+    qitemCn: qitemCn,
+    esntlYn: esntlYn,
+    options: options  // 중첩 객체 배열
+};
+
+// 2. 함수 모듈화 - 관련 기능 그룹화
+function fn_initializeBox($box) {
+    // 박스 초기화 관련 기능 모음
+}
+
+function fn_addNewQuestionBox(type) {
+    // 새 질문 박스 생성 관련 기능 모음
+}</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
