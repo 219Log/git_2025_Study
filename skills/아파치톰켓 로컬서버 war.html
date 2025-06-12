@@ -1,0 +1,701 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>아파치톰켓 로컬서버 war</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1b5336a6-9612-80cf-a8b1-fcf8cba72808" class="page sans"><header><h1 class="page-title">아파치톰켓 로컬서버 war</h1><p class="page-description"></p></header><div class="page-body"><p id="1b5336a6-9612-806d-910a-fd798777a9de" class="">
+</p><figure id="1b5336a6-9612-80c4-874c-cec09d8012ed" class="link-to-page"><a href="%E1%84%8B%E1%85%A1%E1%84%91%E1%85%A1%E1%84%8E%E1%85%B5%E1%84%90%E1%85%A9%E1%86%B7%E1%84%8F%E1%85%A6%E1%86%BA%20%E1%84%85%E1%85%A9%E1%84%8F%E1%85%A5%E1%86%AF%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20war%201b5336a6961280cfa8b1fcf8cba72808/%E1%84%92%E1%85%A7%E1%86%AB%E1%84%8B%E1%85%A5%E1%86%B8%20%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%83%E1%85%AC%E1%84%8B%E1%85%A5%E1%86%BB%E1%84%8B%E1%85%B3%E1%86%AF%E1%84%84%E1%85%A2%201b5336a6961280c4874ccec09d8012ed.html">현업 안되었을때 </a></figure><p id="1b5336a6-9612-800e-8a2d-eff677f476e8" class="">
+</p><div id="1b5336a6-9612-8053-a9c6-c1cc26a82401" class="column-list"><div id="1b5336a6-9612-803d-abbe-d6eb23c708d0" style="width:41.666666666666664%" class="column"><figure id="1b5336a6-9612-8058-a572-e8e4653ed916" class="link-to-page"><a href="%E1%84%8B%E1%85%A1%E1%84%91%E1%85%A1%E1%84%8E%E1%85%B5%E1%84%90%E1%85%A9%E1%86%B7%E1%84%8F%E1%85%A6%E1%86%BA%20%E1%84%85%E1%85%A9%E1%84%8F%E1%85%A5%E1%86%AF%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20war%201b5336a6961280cfa8b1fcf8cba72808/%E1%84%8B%E1%85%A1%E1%84%91%E1%85%A1%E1%84%8E%E1%85%B5(web%20server)%201b5336a696128058a572e8e4653ed916.html">아파치(web server)</a></figure></div><div id="1b5336a6-9612-80e4-b1a7-c3aa81236cbf" style="width:12.500000000000016%" class="column"><p id="1b5336a6-9612-807f-b100-d83bea8483a8" class="">vs</p></div><div id="1b5336a6-9612-80a2-9eaf-dc371f670367" style="width:45.83333333333334%" class="column"><figure id="1b5336a6-9612-8084-89dd-f5b657467ea7" class="link-to-page"><a href="%E1%84%8B%E1%85%A1%E1%84%91%E1%85%A1%E1%84%8E%E1%85%B5%E1%84%90%E1%85%A9%E1%86%B7%E1%84%8F%E1%85%A6%E1%86%BA%20%E1%84%85%E1%85%A9%E1%84%8F%E1%85%A5%E1%86%AF%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20war%201b5336a6961280cfa8b1fcf8cba72808/%E1%84%90%E1%85%A9%E1%86%B7%E1%84%8F%E1%85%A6%E1%86%BA%20(was%20%E1%84%8B%E1%85%B0%E1%86%B8%20%E1%84%8B%E1%85%A5%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%B5%E1%84%8F%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%89%E1%85%A7%E1%86%AB%20%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5)%201b5336a69612808489ddf5b657467ea7.html">톰켓 (was 웹 어플리케이션 서버)</a></figure></div></div><table id="1b5336a6-9612-80c9-8f3d-ff6795ee4038" class="simple-table"><thead class="simple-table-header"><tr id="1b5336a6-9612-80df-a3d6-c022617a9c12"><th id="\~n\" class="simple-table-header-color simple-table-header"></th><th id="aibI" class="simple-table-header-color simple-table-header" style="width:304.390625px">장점</th><th id="X\Ew" class="simple-table-header-color simple-table-header" style="width:289px">단점</th></tr></thead><tbody><tr id="1b5336a6-9612-802b-9f42-eec4b4318f19"><th id="\~n\" class="simple-table-header-color simple-table-header">Apache<br/>(static)<br/></th><td id="aibI" class="" style="width:304.390625px">처리 속도가 빠르다<br/>구조가 단순하여 비용절감<br/>트래픽 과부하에 강하다<br/></td><td id="X\Ew" class="" style="width:289px">정적인 데이터만 처리가 가능<br/>다른 서비스와 상호작용 불가<br/></td></tr><tr id="1b5336a6-9612-802b-acb0-c520e0a33852"><th id="\~n\" class="simple-table-header-color simple-table-header">Tomcat<br/>(dymamic)<br/></th><td id="aibI" class="" style="width:304.390625px">데이터 흐름이 유동적이다.<br/>DB 등 여러 서비스가 가능<br/></td><td id="X\Ew" class="" style="width:289px">아파치에 비해 속도가 느리다<br/>부가적인 비용이 발생한다<br/>트래픽 과부하게 약하다<br/></td></tr></tbody></table><p id="1b5336a6-9612-801d-942a-f68a541ab90e" class="">
+</p><p id="1b5336a6-9612-80ff-be05-e291016527b9" class="">아파치 톰캣</p><ul id="1b5336a6-9612-80ae-9f02-cf4e9e9a03ac" class="bulleted-list"><li style="list-style-type:disc">웹서버 정적데이터 처리에 적당하며 빠름</li></ul><ul id="1b5336a6-9612-8053-ac3f-ef77ae6ada1b" class="bulleted-list"><li style="list-style-type:disc">WAS동적인데이터를 처리, DB연결, 데이터 조작 처리에 활용</li></ul><p id="1b5336a6-9612-8099-9f26-de7369cf71f9" class="">
+</p><p id="1b5336a6-9612-8021-bedc-ca4d1be9e562" class="">합쳐 부르는이유</p><ul id="1b5336a6-9612-808f-8a1f-c13a56d18822" class="bulleted-list"><li style="list-style-type:disc">톰켓에서 편의를 위해 아파치기능(웹서비스 데몬, Httpd)를 포함하고 있음</li></ul><ul id="1b5336a6-9612-8054-8abe-c821ae162a3c" class="bulleted-list"><li style="list-style-type:disc">톰켓이 아파치 일부기능을 가져와서 제공해서 합쳐서부름</li></ul><p id="1b5336a6-9612-80f7-bf10-e38e522492e8" class="">
+</p><p id="1b5336a6-9612-80ba-9f78-e3f663d019e5" class="">톰켓 파일구조</p><div id="1b5336a6-9612-805b-a95c-cf564335d647" class="column-list"><div id="1b5336a6-9612-80cc-b609-cfe183acb53e" style="width:43.75%" class="column"><figure id="1b5336a6-9612-80b1-b644-c08133140337" class="image" style="text-align:left"><a href="%E1%84%8B%E1%85%A1%E1%84%91%E1%85%A1%E1%84%8E%E1%85%B5%E1%84%90%E1%85%A9%E1%86%B7%E1%84%8F%E1%85%A6%E1%86%BA%20%E1%84%85%E1%85%A9%E1%84%8F%E1%85%A5%E1%86%AF%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20war%201b5336a6961280cfa8b1fcf8cba72808/image.png"><img style="width:240px" src="%E1%84%8B%E1%85%A1%E1%84%91%E1%85%A1%E1%84%8E%E1%85%B5%E1%84%90%E1%85%A9%E1%86%B7%E1%84%8F%E1%85%A6%E1%86%BA%20%E1%84%85%E1%85%A9%E1%84%8F%E1%85%A5%E1%86%AF%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20war%201b5336a6961280cfa8b1fcf8cba72808/image.png"/></a></figure><p id="1b5336a6-9612-806e-9b2e-cf8ba6021498" class="">
+</p></div><div id="1b5336a6-9612-80ab-8524-c198124d1805" style="width:56.25%" class="column"><p id="1b5336a6-9612-8015-8e8e-e1555c3bbd2f" class="">bin : 톰캣 실행에 필요한 실행,종료 스트립트파일 위치</p><p id="1b5336a6-9612-801f-a87a-e8ef9b49e8d0" class="">conf : server.xml 및 서버 전체 설정과 관련한 톰캣 설정파일 위치</p><p id="1b5336a6-9612-8080-b6e5-eb9e84399356" class="">lib : 아파치와 같은 다른 웹서버와 톰켓을 연결해주는 jar</p><p id="1b5336a6-9612-8083-9f4d-edafea667176" class="">logs : 톰켓이 실행되는 동안 임시파일 위치</p><p id="1b5336a6-9612-8054-bd8b-d3f19ab48fb2" class="">temp :  톰캣이 실행되는동안 임시파일 위치</p><p id="1b5336a6-9612-802f-9d6b-d026172388d9" class="">webapps : 웹 어플리케이션 위치</p><p id="1b5336a6-9612-804a-88db-ea6b385b187f" class="">work :jsp 파일을 서블릿형태로 변환한 java파일과 class 파일 위치</p><p id="1b5336a6-9612-8078-a030-e905135d4fe1" class="">
+</p></div></div><p id="1b5336a6-9612-80f8-95c5-e0a223269ac8" class="">bin폴더 </p><ul id="1b5336a6-9612-80ef-aebc-c6720d4ec3df" class="bulleted-list"><li style="list-style-type:disc">startup.bat : 톰캣을 실행(내부적으로 카타리나 뱃 실행)</li></ul><ul id="1b5336a6-9612-8099-a558-ffa149aa1b7a" class="bulleted-list"><li style="list-style-type:disc">shutdown.bat : 톰캣을 정지(내부적으로 카타리나 뱃을 실행)</li></ul><p id="1b5336a6-9612-80a2-b742-c9920f6acadb" class="">
+</p><p id="1b5336a6-9612-80c8-96bc-dde182df0e37" class="">conf폴더</p><ul id="1b5336a6-9612-80de-8b31-cffa29daa82a" class="bulleted-list"><li style="list-style-type:disc">server.xml : 서버 설정과 관련된내용</li></ul><ul id="1b5336a6-9612-8086-89e9-f5f54dad38bb" class="bulleted-list"><li style="list-style-type:disc">web.xml : 서버가 올라갈때 먼저 읽는 파일요한파일</li></ul><ul id="1b5336a6-9612-8036-be20-cd5a730d67b5" class="bulleted-list"><li style="list-style-type:disc">context.xml : ???</li></ul><p id="1b5336a6-9612-8005-bd92-ca88acae4bdd" class="">
+</p><p id="1b5336a6-9612-80c6-874b-c63db563642d" class="">webapps 폴더</p><ul id="1b5336a6-9612-80ff-81dd-c95437ac0030" class="bulleted-list"><li style="list-style-type:disc">톰캣이 제공하는 웹애플리케이션 기본위치</li></ul><ul id="1b5336a6-9612-80c3-b5cd-cb33b67d46e7" class="bulleted-list"><li style="list-style-type:disc">보통 이클립스통해서 생성하는데 폭더구조에 맞춰서 웹프로젝트 넣음</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1b5336a6-9612-8057-883d-c76acaadd022"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><p id="1b5336a6-9612-80f6-8d9e-f0f47af146ff" class="">접속할때 사용하는 http://localhost: 8080/ ← 이다음위에 경로에 폴더나 파일이 들어간다<br/><br/>예를들어)<br/></p><p id="1b5336a6-9612-8042-9eb8-e24bb547fad5" class="">webapps 폴더안에 ‘start’ 폴더가 있고 그안에 ‘index.html’ 파일이 있다면<br/>접속하기위해 http://localhost: 8080/start/index.html로 접속하면된다.<br/><br/>Root 디렉토리는 최상위 폴더라 자료가없으면 자동으로 Root 디렉토리 안으로 찾아준다<br/><br/>war파일 넣고실행하면 압축을 풀어 파일 형태로 실행되어 사용된다.<br/></p></div></figure><p id="1b5336a6-9612-8091-a356-ec464c41ee4b" class="">
+</p><p id="1b5336a6-9612-8071-8219-fdbec19ce458" class="">톰캣 사용방법<div class="indented"><ol type="1" id="1b5336a6-9612-808a-bd31-f4f175c4da0d" class="numbered-list" start="1"><li>zip 버전일때 <ul id="1b5336a6-9612-803c-ad1e-de13a523c43f" class="bulleted-list"><li style="list-style-type:disc">톰캣 경로로 들어간다음 cmd 실행</li></ul><ul id="1b5336a6-9612-808e-811c-c4a221c8cecc" class="bulleted-list"><li style="list-style-type:disc">dir 입력후</li></ul><ul id="1b5336a6-9612-8060-9ec8-da5da58b0309" class="bulleted-list"><li style="list-style-type:disc">startup.bat 실행</li></ul><ul id="1b5336a6-9612-80b9-b40f-f3612514cf6d" class="bulleted-list"><li style="list-style-type:disc">실행하면 <ul id="1b5336a6-9612-8047-ab34-fa1bc0c33bf6" class="bulleted-list"><li style="list-style-type:circle">catalina_base</li></ul><ul id="1b5336a6-9612-80a0-9190-efaa1d8d1735" class="bulleted-list"><li style="list-style-type:circle">catalina_hame</li></ul><ul id="1b5336a6-9612-8044-a17a-dc45b6119cf5" class="bulleted-list"><li style="list-style-type:circle">jre_home</li></ul><ul id="1b5336a6-9612-80c9-bfc6-cc295027bfe9" class="bulleted-list"><li style="list-style-type:circle">class pass</li></ul><p id="1b5336a6-9612-8015-9ed1-f0b0e8df4b91" class="">경로가 나옴<br/>그리고 톰캣 실행창이 뜸<br/></p><p id="1b5336a6-9612-805f-90fb-c35fb0db228b" class="">
+</p></li></ul></li></ol><ol type="1" id="1b5336a6-9612-8058-9844-e09e628c4581" class="numbered-list" start="2"><li>만약 창이 뜨자마자 꺼지거나 에러가나면 자바환경변수가 잘못된것<ul id="1b5336a6-9612-80ce-9652-ebedca8f3798" class="bulleted-list"><li style="list-style-type:disc">잘못된경우<ul id="1b5336a6-9612-801e-9864-f10da41a3c43" class="bulleted-list"><li style="list-style-type:circle">환경변수 들어가서<ul id="1b5336a6-9612-80cb-b1a8-e45a712b960f" class="bulleted-list"><li style="list-style-type:square">JAVA_HOME</li></ul><ul id="1b5336a6-9612-80a2-9348-d1bb359722c7" class="bulleted-list"><li style="list-style-type:square">JRE_HOME 생성 및 수정 </li></ul></li></ul></li></ul></li></ol></div></p><p id="1b5336a6-9612-80b1-a602-ff2c5a5d0f3b" class="">
+</p><p id="1b5336a6-9612-8045-b795-f0eff7835045" class="">톰캣 포트 변경(server.xml)<div class="indented"><ul id="1b5336a6-9612-8059-9137-c11ce39994f9" class="bulleted-list"><li style="list-style-type:disc">이클립스에서 설정한 포트와 충돌 나는것을 방지하기 위해 기본 톰캣 포트 변경할 수 있음</li></ul><ul id="1b5336a6-9612-809e-903a-d8cd7b8dce7e" class="bulleted-list"><li style="list-style-type:disc">기본적으로 port=”8005”인데 8105로 변경한다</li></ul><figure id="1b5336a6-9612-8020-9586-edcf08ed7c55" class="image"><a href="%E1%84%8B%E1%85%A1%E1%84%91%E1%85%A1%E1%84%8E%E1%85%B5%E1%84%90%E1%85%A9%E1%86%B7%E1%84%8F%E1%85%A6%E1%86%BA%20%E1%84%85%E1%85%A9%E1%84%8F%E1%85%A5%E1%86%AF%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20war%201b5336a6961280cfa8b1fcf8cba72808/image%201.png"><img style="width:684px" src="%E1%84%8B%E1%85%A1%E1%84%91%E1%85%A1%E1%84%8E%E1%85%B5%E1%84%90%E1%85%A9%E1%86%B7%E1%84%8F%E1%85%A6%E1%86%BA%20%E1%84%85%E1%85%A9%E1%84%8F%E1%85%A5%E1%86%AF%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20war%201b5336a6961280cfa8b1fcf8cba72808/image%201.png"/></a></figure></div></p><p id="1b5336a6-9612-80a7-ac63-e80ee47dc4a1" class="">
+</p><p id="1b5336a6-9612-802f-8ce9-e32c50f7affa" class="">
+</p><p id="1b5336a6-9612-80cb-abf5-e26218aaed9d" class="">웹홈페이지 경로변경(server.xml)<div class="indented"><ul id="1b5336a6-9612-805a-a80b-eee2d4dcc582" class="bulleted-list"><li style="list-style-type:disc">웹 프로젝트를 톰캣의 webapps폴더가 아닌 다른경로로 변경하는 방법이다.</li></ul><ul id="1b5336a6-9612-80be-ae94-f12efa02676b" class="bulleted-list"><li style="list-style-type:disc">&lt;host&gt;태그 안에 빨간색으로 체크한 코드처럼 &lt;context doc Base=””/&gt;부분에 자신의 프로젝트가 있는경로를 추가하면된다. </li></ul><figure id="1b5336a6-9612-804f-9647-c620fef089f4" class="image"><a href="%E1%84%8B%E1%85%A1%E1%84%91%E1%85%A1%E1%84%8E%E1%85%B5%E1%84%90%E1%85%A9%E1%86%B7%E1%84%8F%E1%85%A6%E1%86%BA%20%E1%84%85%E1%85%A9%E1%84%8F%E1%85%A5%E1%86%AF%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20war%201b5336a6961280cfa8b1fcf8cba72808/image%202.png"><img style="width:685.96875px" src="%E1%84%8B%E1%85%A1%E1%84%91%E1%85%A1%E1%84%8E%E1%85%B5%E1%84%90%E1%85%A9%E1%86%B7%E1%84%8F%E1%85%A6%E1%86%BA%20%E1%84%85%E1%85%A9%E1%84%8F%E1%85%A5%E1%86%AF%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20war%201b5336a6961280cfa8b1fcf8cba72808/image%202.png"/></a></figure></div></p><p id="1b5336a6-9612-8064-826a-dfa6a1532724" class="">
+</p><hr id="1b5336a6-9612-8021-af4e-c8d6ed40c2a2"/><p id="1b5336a6-9612-80b6-8fe4-d61346a5b8ab" class="">
+</p><p id="1b5336a6-9612-8051-ae18-d807ab41d26a" class="">톰캣 JDBC 연결 (context.xml)<div class="indented"><ul id="1b5336a6-9612-80be-a76d-d144cba0a006" class="bulleted-list"><li style="list-style-type:disc">JDBC를 이용해 자바와 오라클 데이터베이스를 연결해줘야 할 때 db정보를 입력해준다 </li></ul><figure id="1b5336a6-9612-8005-af09-f6cf8855e466" class="image"><a href="%E1%84%8B%E1%85%A1%E1%84%91%E1%85%A1%E1%84%8E%E1%85%B5%E1%84%90%E1%85%A9%E1%86%B7%E1%84%8F%E1%85%A6%E1%86%BA%20%E1%84%85%E1%85%A9%E1%84%8F%E1%85%A5%E1%86%AF%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20war%201b5336a6961280cfa8b1fcf8cba72808/image%203.png"><img style="width:681.96875px" src="%E1%84%8B%E1%85%A1%E1%84%91%E1%85%A1%E1%84%8E%E1%85%B5%E1%84%90%E1%85%A9%E1%86%B7%E1%84%8F%E1%85%A6%E1%86%BA%20%E1%84%85%E1%85%A9%E1%84%8F%E1%85%A5%E1%86%AF%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20war%201b5336a6961280cfa8b1fcf8cba72808/image%203.png"/></a></figure></div></p><p id="1b5336a6-9612-8087-8ffa-ee8b528db696" class=""><div class="indented"><ul id="1b5336a6-9612-8076-8e7c-fd3dca70bf2d" class="bulleted-list"><li style="list-style-type:disc">그리고  lib  폴더에 ojdbc 오라클 드라이버를 추가해주면 된다.<figure id="1b5336a6-9612-802f-8ef0-fc6c249d0f5a" class="image"><a href="%E1%84%8B%E1%85%A1%E1%84%91%E1%85%A1%E1%84%8E%E1%85%B5%E1%84%90%E1%85%A9%E1%86%B7%E1%84%8F%E1%85%A6%E1%86%BA%20%E1%84%85%E1%85%A9%E1%84%8F%E1%85%A5%E1%86%AF%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20war%201b5336a6961280cfa8b1fcf8cba72808/image%204.png"><img style="width:145px" src="%E1%84%8B%E1%85%A1%E1%84%91%E1%85%A1%E1%84%8E%E1%85%B5%E1%84%90%E1%85%A9%E1%86%B7%E1%84%8F%E1%85%A6%E1%86%BA%20%E1%84%85%E1%85%A9%E1%84%8F%E1%85%A5%E1%86%AF%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20war%201b5336a6961280cfa8b1fcf8cba72808/image%204.png"/></a></figure></li></ul></div></p><hr id="1b5336a6-9612-806d-b1fd-d4d439ec2c4a"/><p id="1b5336a6-9612-8013-af05-e7b59f071e5d" class="">
+</p><p id="1b5336a6-9612-8071-92ee-e4ac4f94e16d" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
