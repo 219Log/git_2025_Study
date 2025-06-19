@@ -1,0 +1,780 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>클로저와 스코프와 랙시컬 설명</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1f7336a6-9612-809c-8f29-efe2e040393d" class="page sans"><header><h1 class="page-title">클로저와 스코프와 랙시컬 설명</h1><p class="page-description"></p></header><div class="page-body"><h1 id="1f7336a6-9612-80ab-8f93-da84e032766d" class=""><strong>클로저, 렉시컬 환경, 스코프의 관계 설명</strong></h1><h2 id="1f7336a6-9612-80c6-9c28-df23441d0f45" class=""><strong>각 개념의 정의</strong></h2><h3 id="1f7336a6-9612-8010-ac29-d5e1f6b3ab68" class=""><strong>렉시컬 환경(Lexical Environment)</strong></h3><ul id="1f7336a6-9612-8058-99d2-fdf1bfaa5488" class="bulleted-list"><li style="list-style-type:disc"><strong>정의</strong>: 코드가 <strong>물리적으로 작성된 위치</strong>에 따른 환경</li></ul><ul id="1f7336a6-9612-802b-a191-cbdda50ce805" class="bulleted-list"><li style="list-style-type:disc"><strong>역할</strong>: 변수와 함수 선언이 저장되는 내부 데이터 구조</li></ul><ul id="1f7336a6-9612-801a-8ab6-c49974d07ffd" class="bulleted-list"><li style="list-style-type:disc"><strong>특징</strong>: 코드를 작성할 때 결정되며 변경되지 않음</li></ul><h3 id="1f7336a6-9612-80c7-972c-db8a7e5c3e79" class=""><strong>스코프(Scope)</strong></h3><ul id="1f7336a6-9612-80fa-b058-c9ca39e1a43c" class="bulleted-list"><li style="list-style-type:disc"><strong>정의</strong>: 변수가 <strong>접근 가능한 유효 범위</strong></li></ul><ul id="1f7336a6-9612-805c-9954-e8b74ac3ec93" class="bulleted-list"><li style="list-style-type:disc"><strong>종류</strong>: 전역 스코프, 함수 스코프, 블록 스코프(ES6+)</li></ul><ul id="1f7336a6-9612-800c-86f3-f21b26109f6d" class="bulleted-list"><li style="list-style-type:disc"><strong>특징</strong>: 렉시컬 환경을 기반으로 결정됨</li></ul><h3 id="1f7336a6-9612-806b-a658-ec890e31d4a1" class=""><strong>클로저(Closure)</strong></h3><ul id="1f7336a6-9612-8014-ba2a-ea1aff02955b" class="bulleted-list"><li style="list-style-type:disc"><strong>정의</strong>: 함수와 그 함수가 선언된 렉시컬 환경의 조합</li></ul><ul id="1f7336a6-9612-8016-b43e-d775fe3f4580" class="bulleted-list"><li style="list-style-type:disc"><strong>특징</strong>: 함수가 자신이 생성된 스코프의 변수들에 계속 접근 가능</li></ul><h2 id="1f7336a6-9612-8050-b888-f3d3a17b30f5" class=""><strong>세 개념의 관계</strong></h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f7336a6-9612-80bc-bb7d-f403f0c5f4c0" class="code"><code class="language-JavaScript">function makeCounter() {
+    var count = 0;  // 렉시컬 환경에 count 변수 생성
+    
+    return function() {  // 클로저 함수 생성
+        return ++count;  // 외부 함수의 변수 접근
+    };
+}
+
+var counter = makeCounter();
+console.log(counter());  // 1
+console.log(counter());  // 2</code></pre><ul id="1f7336a6-9612-805a-9420-d7a5f7b83ae0" class="bulleted-list"><li style="list-style-type:disc"><strong>렉시컬 환경</strong>:</li></ul><ul id="1f7336a6-9612-8014-9d36-c26f3ba8002e" class="bulleted-list"><li style="list-style-type:disc">makeCounter 함수 내부는 하나의 렉시컬 환경</li></ul><ul id="1f7336a6-9612-803c-adb9-e99671331d83" class="bulleted-list"><li style="list-style-type:disc">count 변수는 이 환경에 저장됨</li></ul><ul id="1f7336a6-9612-80d4-9d89-c1d164f72559" class="bulleted-list"><li style="list-style-type:disc"><strong>스코프</strong>:</li></ul><ul id="1f7336a6-9612-80a5-b505-d2bea9063a8d" class="bulleted-list"><li style="list-style-type:disc">count 변수의 스코프는 makeCounter 함수 내부로 제한됨</li></ul><ul id="1f7336a6-9612-8053-8920-ed9c0048f48f" class="bulleted-list"><li style="list-style-type:disc">일반적으로는 함수 실행 완료 후 접근 불가능해야 함</li></ul><ul id="1f7336a6-9612-8020-80e3-c9f0f1c54787" class="bulleted-list"><li style="list-style-type:disc"><strong>클로저</strong>:</li></ul><ul id="1f7336a6-9612-805d-8e4b-f88392ffd2e8" class="bulleted-list"><li style="list-style-type:disc">반환된 익명 함수는 자신이 생성된 렉시컬 환경을 &quot;기억&quot;</li></ul><ul id="1f7336a6-9612-808c-a4df-cb5885520b3e" class="bulleted-list"><li style="list-style-type:disc">그래서 makeCounter 실행이 끝나도 count에 계속 접근 가능</li></ul><ul id="1f7336a6-9612-80d5-9819-ca18913f8b7f" class="bulleted-list"><li style="list-style-type:disc">이 &quot;기억하는 능력&quot;이 클로저의 핵심</li></ul><h2 id="1f7336a6-9612-8069-92f1-c15b26a4e9ac" class=""><strong>요약</strong></h2><ul id="1f7336a6-9612-8089-af1d-eb35e257ea3a" class="bulleted-list"><li style="list-style-type:disc"><strong>렉시컬 환경</strong>은 코드의 물리적 위치에 따른 구조</li></ul><ul id="1f7336a6-9612-80d1-9460-d951894bd702" class="bulleted-list"><li style="list-style-type:disc"><strong>스코프</strong>는 이 구조에 따른 변수 접근 규칙</li></ul><ul id="1f7336a6-9612-8087-a1c6-f716511b3c61" class="bulleted-list"><li style="list-style-type:disc"><strong>클로저</strong>는 함수가 자신의 렉시컬 환경(스코프)을 기억하는 메커니즘</li></ul><p id="1f7336a6-9612-8002-8cf3-f5c2f06a79b4" class="">쉽게 말해, 렉시컬 환경은 &quot;집의 설계도&quot;, 스코프는 &quot;각 방의 경계&quot;, 클로저는 &quot;방을 나간 후에도 그 방의 물건을 계속 사용할 수 있는 능력&quot;입니다.</p><p id="1f7336a6-9612-80e5-8d41-d4212f959b7f" class="">
+</p><p id="1f7336a6-9612-80fe-99c7-daad6f8dff48" class="">
+</p><p id="1f7336a6-9612-80dd-9d93-fa20545d6dc2" class="">클로저는 함수가 자신의 고향(생성된 렉시컬 환경)을 잊지 않는 특별한 능력</p><p id="1f7336a6-9612-80c0-a33f-f1a4b8c4377a" class="">
+</p><p id="1f7336a6-9612-80bc-ac23-c3a112afef25" class="">
+</p><hr id="1f7336a6-9612-80a5-87bc-e85e35bae815"/><p id="1f7336a6-9612-80d3-ab22-dcf8a99895a6" class="">클로저 설명</p><p id="1f7336a6-9612-802d-a718-f51ae81215b2" class="">
+</p><h1 id="1f7336a6-9612-8080-9a26-d03a051ce9d3" class=""><strong>클로저와 렉시컬 환경의 관계 - 정확히 이해하셨습니다!</strong></h1><h2 id="1f7336a6-9612-8098-b22e-e58346bf03ce" class=""><strong>당신의 이해가 완벽합니다 👍</strong></h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f7336a6-9612-8035-b69a-e47a4f3d8dc5" class="code"><code class="language-JavaScript">function createCounter() {
+    let count = 0;  // 렉시컬 환경의 변수
+    
+    // 이 함수는 클로저입니다
+    return function() {
+        count++;  // 원래 렉시컬 환경의 변수 사용
+        return count;
+    };
+}
+
+// 서로 다른 곳에서 호출해도 count 값을 기억합니다
+const counter1 = createCounter();  // 첫 번째 클로저 생성
+
+console.log(counter1());  // 1
+console.log(counter1());  // 2
+
+// 다른 함수에서 호출해도 기억합니다
+function somewhere() {
+    console.log(counter1());  // 3 - 계속 기억!
+}
+
+somewhere();</code></pre><p id="1f7336a6-9612-80f4-a146-ce970b797a8e" class="">
+</p><h2 id="1f7336a6-9612-8083-825f-cf6d9631d43b" class=""><strong>여러 클로저 호출 시 동작 원리</strong></h2><p id="1f7336a6-9612-80cd-8dcb-ee122133db08" class="">각 클로저 호출은 독립적인 렉시컬 환경을 만듭니다:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f7336a6-9612-80be-abc6-f63f86686443" class="code"><code class="language-JavaScript">// 첫 번째 카운터
+const counter1 = createCounter();
+console.log(counter1());  // 1
+console.log(counter1());  // 2
+
+// 두 번째 카운터 (독립적인 새 렉시컬 환경)
+const counter2 = createCounter();
+console.log(counter2());  // 1 (새로운 환경이므로 다시 1부터 시작)
+console.log(counter2());  // 2
+
+console.log(counter1());  // 3 (counter1의 count는 계속 유지됨)</code></pre><p id="1f7336a6-9612-80c6-8590-fc68cf3dce80" class="">
+</p><h2 id="1f7336a6-9612-80ed-bff5-d9492f7c33da" class=""><strong>렉시컬 환경 공유 예시</strong></h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f7336a6-9612-802a-8748-ca94f38782fe" class="code"><code class="language-JavaScript">function createBankAccount(initialBalance) {
+    let balance = initialBalance;  // 공유될 렉시컬 환경의 변수
+    
+    // 여러 클로저가 같은 balance 변수를 공유
+    return {
+        deposit: function(amount) {
+            balance += amount;
+            return balance;
+        },
+        withdraw: function(amount) {
+            balance -= amount;
+            return balance;
+        },
+        getBalance: function() {
+            return balance;
+        }
+    };
+}
+
+const account = createBankAccount(1000);
+
+console.log(account.getBalance());  // 1000
+console.log(account.deposit(500));  // 1500
+console.log(account.withdraw(200)); // 1300
+console.log(account.getBalance());  // 1300</code></pre><p id="1f7336a6-9612-800d-a824-f9c577ee787a" class="">맞습니다! 클로저는 자신이 태어난 렉시컬 환경의 변수들을 &quot;기억&quot;하고, 그 환경이 사라진 후에도 계속 접근할 수 있는 마법 같은 메커니즘입니다! 👍</p><p id="1f7336a6-9612-806c-830a-c56164914f70" class="">
+</p><p id="1f7336a6-9612-80f2-8c6c-f13340fa6115" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f7336a6-9612-80c6-a60f-d3f88653a24b" class="code"><code class="language-JavaScript">1. createWallet 함수 실행
+   +------------------------+
+   | 렉시컬 환경:           |
+   | money = 10000         |
+   |                        |
+   | wallet 함수 생성       |
+   | wallet.deposit 생성    |
+   | wallet.withdraw 생성   |
+   +------------------------+
+           |
+           | return wallet
+           ↓
+2. myWallet = wallet 함수
+   +------------------------+
+   | 전역 렉시컬 환경:      |
+   | myWallet = function   |
+   +------------------------+
+           |
+           | 하지만 wallet 함수는
+           | 여전히 createWallet의 
+           | 렉시컬 환경 money를 기억!
+           ↓
+3. myWallet() 호출
+   &quot;현재 잔액: 10000원&quot;</code></pre><p id="1f7336a6-9612-8061-89e0-dfbc33d9b4bd" class="">클로저는 함수가 자신의 고향(생성된 렉시컬 환경)을 잊지 않는 특별한 능력입니다!</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
