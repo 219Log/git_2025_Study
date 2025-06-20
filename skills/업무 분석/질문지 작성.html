@@ -1,0 +1,2088 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>질문지 작성</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1f7336a6-9612-807c-844f-db1e24373ce3" class="page sans"><header><h1 class="page-title">질문지 작성</h1><p class="page-description"></p></header><div class="page-body"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f7336a6-9612-8016-b8e0-c17c2033bb77" class="code"><code class="language-JavaScript">&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+	pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@ taglib uri=&quot;http://java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot;%&gt;
+&lt;%@ taglib prefix=&quot;fn&quot; uri=&quot;http://java.sun.com/jsp/jstl/functions&quot;%&gt;
+&lt;%@ taglib prefix=&quot;form&quot; uri=&quot;http://www.springframework.org/tags/form&quot;%&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+	var updatedQuestList = []; // 수정된 응답항목 목록
+	var deletedQuestList = []; // 삭제된 응답항목 목록
+
+	$(function() {
+		// 신청자이름/ 이메일은 필수. 변경불가.
+		$(&quot;[id*=E01A03A01&quot;).attr(&quot;disabled&quot;, &quot;disabled&quot;);
+		$(&quot;[id*=E01A03A02&quot;).attr(&quot;disabled&quot;, &quot;disabled&quot;);
+		// 공고정보설정 버튼 클릭
+		$(&#x27;#btnPbanc&#x27;).click(function(e) {
+			e.preventDefault();
+			var frm = document.regForm;
+			frm.action = &quot;&lt;c:url value=&#x27;${referer}&#x27; /&gt;&quot;;
+			frm.submit();
+		});
+
+		// 텍스트 입력 시 자동 높이 조절
+		function autoResize(e) {
+			$(e).css(&#x27;height&#x27;, &#x27;auto&#x27;);
+			$(e).css(&#x27;height&#x27;, e.scrollHeight + &#x27;px&#x27;);
+		}
+
+		// 기존 텍스트에리어에 대해 초기 높이 설정
+		$(&#x27;.question-title&#x27;).each(function() {
+			autoResize(this);
+		});
+
+		// 입력 시 높이 자동 조절
+		$(document).on(&#x27;input&#x27;, &#x27;.question-title&#x27;, function() {
+			autoResize(this);
+		});
+
+		// 본인인증 체크박스 클릭 시 자동으로 스위치 ON
+		$(&quot;#useYn_E01A03A03&quot;).on(&#x27;change&#x27;, function() {
+			if ($(this).is(&#x27;:checked&#x27;)) {
+				$(&quot;#esntlYn_E01A03A03&quot;).prop(&#x27;checked&#x27;, true);
+			}
+		});
+
+		// 필수 스위치가 변경될 때 본인인증 체크박스 상태 확인
+		$(&quot;#esntlYn_E01A03A03&quot;).on(&#x27;change&#x27;, function() {
+			if ($(&quot;#useYn_E01A03A03&quot;).is(&#x27;:checked&#x27;)) {
+				$(&quot;#useYn_E01A03A03&quot;).prop(&#x27;checked&#x27;, false);
+			}
+		});
+
+		// 저장 버튼 클릭 이벤트
+		$(&#x27;#btnSave&#x27;).click(function(e) {
+			e.preventDefault();
+			saveData(&quot;save&quot;); // 저장 후 목록으로 이동
+		});
+
+		// 미리보기 버튼 클릭 이벤트
+		$(&#x27;#btnPrev&#x27;).click(function(e) {
+			e.preventDefault();
+			saveData(&quot;preview&quot;); // 저장 후 미리보기로 이동
+		});
+
+		// 승인 절차 신청 버튼 클릭 이벤트
+		$(&quot;#btnAprvAply&quot;).click(
+				function(e) {
+					e.preventDefault();
+					if (&quot;Y&quot; != $(&quot;#picYn&quot;).val()) {
+						alert(&#x27;해당 공고의 담당자만 수정할 수 있습니다.&#x27;, function() {
+						});
+						return;
+					}
+
+					// 개인정보 수집 및 이용 내용
+					var prvcPlcyCn = $(&#x27;#textarea1&#x27;).val();
+
+					// 개인정보 수집 및 이용 내용 확인 체크
+					var prvcClctAgreYn = $(&#x27;#checkbox1&#x27;).is(&#x27;:checked&#x27;);
+
+					// 필수 체크
+					if (!prvcPlcyCn) {
+						alert(&#x27;개인정보 수집 및 이용 내용을 입력해주세요.&#x27;, function() {
+							$(&#x27;#textarea1&#x27;).focus();
+						});
+						return;
+					}
+
+					if (!prvcClctAgreYn) {
+						alert(&#x27;개인정보 수집 및 이용 내용 확인이 필요합니다.&#x27;, function() {
+							$(&#x27;#checkbox1&#x27;).focus();
+						});
+						return;
+					}
+
+					let emptyInput = null;
+
+					// file-extn-lmt 클래스를 가진 입력 필드를 제외하고 검사
+					$(&quot;input[type=&#x27;text&#x27;]:not(.file-extn-lmt), textarea&quot;).each(
+							function() {
+								if ($(this).val().trim() === &quot;&quot;) {
+									emptyInput = $(this); // 첫 번째 빈 입력 필드 저장
+									return false; // 반복문 중단
+								}
+							});
+
+					if (emptyInput) {
+						alert(&#x27;빈 값이 있습니다. 값을 입력해주세요.&#x27;, function() {
+							emptyInput.focus(); // 빈 입력 필드에 포커스
+						});
+						return;
+					}
+
+					saveData(&quot;approve&quot;);
+				});
+
+		// 목록 이동 함수
+		function fn_goList() {
+			var frm = document.regForm;
+			frm.action = &#x27;&lt;c:url value=&quot;/survey/onlnRcpt/onlnRcptList.do&quot; /&gt;&#x27;;
+			frm.submit();
+		}
+
+		// 데이터 저장 함수
+		function saveData(actionType) {
+			// 현재 공고번호 가져오기
+			var pbancNo = &#x27;${resultVO.pbancNo}&#x27;;
+			if (!pbancNo) {
+				alert(&#x27;공고번호가 없습니다.&#x27;);
+				return;
+			}
+
+			// 개인정보 동의 활용 기간 체크 (true: 3개월, false: 6개월)
+			var prvcStrgTermCd = $(&#x27;input[name=&quot;prvcStrgTermCd&quot;]&#x27;).is(
+					&#x27;:checked&#x27;);
+
+			// 개인정보 수집 및 이용 내용
+			var prvcPlcyCn = $(&#x27;#textarea1&#x27;).val();
+
+			// 개인정보 수집 및 이용 내용 확인 체크
+			var prvcClctAgreYn = $(&#x27;#checkbox1&#x27;).is(&#x27;:checked&#x27;);
+
+			// 필수 체크
+			if (!prvcPlcyCn) {
+				alert(&#x27;개인정보 수집 및 이용 내용을 입력해주세요.&#x27;, function() {
+					$(&#x27;#textarea1&#x27;).focus();
+				});
+				return;
+			}
+
+			if (!prvcClctAgreYn) {
+				alert(&#x27;개인정보 수집 및 이용 내용 확인이 필요합니다.&#x27;, function() {
+					$(&#x27;#checkbox1&#x27;).focus();
+				});
+				return;
+			}
+
+			// 미입력 항목값 체크 변수
+			var hasEmpty2 = false;
+
+			// 1. 개인정보 항목설정 데이터 수집
+			var rspnsArtclList = [];
+			$(&quot;[id^=useYn&quot;).each(function() {
+				var id = $(this).attr(&quot;id&quot;).replace(&#x27;useYn_&#x27;, &#x27;&#x27;);
+				rspnsArtclList.push({
+					pbancNo : pbancNo,
+					artclCd : id,
+					useYn : $(&#x27;#useYn_&#x27; + id).is(&#x27;:checked&#x27;) ? &#x27;Y&#x27; : &#x27;N&#x27;,
+					esntlYn : $(&#x27;#esntlYn_&#x27; + id).is(&#x27;:checked&#x27;) ? &#x27;Y&#x27; : &#x27;N&#x27;
+				});
+			});
+
+			// 2. 질문 유형 데이터 수집
+			var updatedQuestList = [];
+			var hasEmptyQuestion = false; // 질문 미입력 플래그
+			var hasEmptyOption = false; // 선택항목 미입력 플래그
+			var $emptyQuestionBox = null; // 미입력 질문 박스
+
+			$(&#x27;.re_wr_box&#x27;)
+					.each(
+							function(index) {
+								var $box = $(this);
+								var qiteid = $box.attr(&quot;id&quot;);
+
+								var type = $box.find(&#x27;.choice_sel_active&#x27;)
+										.attr(&#x27;data-type&#x27;);
+								var qitemId = $box.attr(&#x27;id&#x27;);
+								var qitemCn = $box.find(&#x27;.question-title&#x27;)
+										.val();
+
+								// 질문 내용 검사
+								if (qitemCn == &#x27;&#x27;) {
+									hasEmptyQuestion = true;
+									if (!$emptyQuestionBox) {
+										$emptyQuestionBox = $box; // 첫 번째 미입력 질문 저장
+									}
+								}
+
+								var esntlYn = $box.find(&#x27;.switch-input&#x27;).is(
+										&#x27;:checked&#x27;) ? &#x27;Y&#x27; : &#x27;N&#x27;;
+								var maxLen = $box.find(&#x27;.text-limit&#x27;).val();
+								var maxChcCnt = $box.find(&#x27;.checkbox-limit&#x27;)
+										.val();
+
+								var questionData = {
+									qiteid : qiteid,
+									pbancNo : pbancNo,
+									qitemId : qitemId,
+									type : type,
+									qitemCn : qitemCn,
+									esntlYn : esntlYn,
+									maxLen : maxLen,
+									maxChcCnt : maxChcCnt,
+									sortSn : index + 1
+								};
+
+								if ([ &#x27;objective&#x27;, &#x27;checkbox&#x27;, &#x27;dropDown&#x27; ]
+										.includes(type)) {
+									var options = [];
+									$box.find(&#x27;.option-text&#x27;).each(
+											function(index) {
+												var $opt = $(this);
+												var anschcId = $opt.data(&#x27;id&#x27;);
+												var anschcCn = $opt.val();
+
+												if (anschcCn == &#x27;&#x27;) {
+													hasEmptyOption = true; // 선택항목 미입력 플래그
+												}
+
+												options.push({
+													anschcId : anschcId,
+													anschcCn : anschcCn,
+													sortSn : index + 1
+												});
+
+											});
+									questionData.options = options;
+								} else if (type === &#x27;file&#x27;) {
+									var fileExtnLmt = $box.find(
+											&#x27;.file-extn-lmt&#x27;).val();
+									// 파일 확장자 검사 제외
+									questionData.fileExtnLmt = fileExtnLmt;
+								}
+
+								updatedQuestList.push(questionData);
+							});
+
+			// 검사 결과에 따른 처리
+			if (hasEmptyQuestion) {
+				alert(&#x27;질문 내용을 입력해주세요.&#x27;);
+				if ($emptyQuestionBox) {
+					$emptyQuestionBox.find(&#x27;.question-title&#x27;).focus();
+				}
+				return;
+			}
+
+			if (hasEmptyOption) {
+				alert(&#x27;객관식/체크박스 문항의 선택지를 입력해주세요.&#x27;);
+				return;
+			}
+
+			// 서버 전송용 데이터 객체 구성
+			var requestData = {
+				pbancNo : pbancNo,
+				prvcStrgTermCd : prvcStrgTermCd,
+				prvcPlcyCn : prvcPlcyCn,
+				prvcClctAgreYn : prvcClctAgreYn,
+				rspnsArtclList : rspnsArtclList,
+				updatedQuestList : updatedQuestList,
+				deletedQuestList : deletedQuestList,
+				actionType : actionType, // // &#x27;preview&#x27;, &#x27;save&#x27;, &#x27;approve&#x27; 중 하나
+				hasEmpty2 : hasEmpty2
+			};
+
+			// AJAX를 통한 서버 저장 요청
+			$.ajax({
+				url : &#x27;&lt;c:url value=&quot;/survey/onlnRcpt/addRspnsArtclStngSave.do&quot;/&gt;&#x27;,
+				type : &#x27;POST&#x27;,
+				data : JSON.stringify(requestData),
+				contentType : &#x27;application/json&#x27;,
+				dataType : &#x27;json&#x27;,
+				success : function(response) {
+					if (response.success) {
+						// 미리보기 팝업 열기
+						if (actionType === &quot;preview&quot;) {
+							fn_popup(&#x27;&lt;c:url value=&quot;/survey/onlnRcpt/rspnsArtclPrvw.do?pbancNo=&#x27; + pbancNo + &#x27;&quot;/&gt;&#x27;);
+						// 승인 절차 신청
+						} else if (actionType === &quot;approve&quot;) {
+							confirm(
+									&#x27;정상적으로 저장되었습니다.\r \n 개인정보 관리자에게 메일을 발송하여 공고 승인 절차를 진행하시겠습니까?&#x27;,
+									function(result) {
+										if (result) {
+											const url = &#x27;&lt;c:url value=&quot;/survey/onlnRcpt/updateAgreeInfo.do&quot;/&gt;&#x27;;
+											const params = $(&quot;#regForm&quot;)
+													.serializeArray();
+											gfn_ajaxCall(
+												url,
+												params,
+												function(data) {
+													alert(
+														data.message, function(result) {
+																if (result) {
+																	fn_goList(); // 목록 으로 이동
+																}
+															}
+													);
+											});
+										}
+									});
+						// 임시저장
+						} else {
+							alert(response.message, function(result) {
+								// 상세페이지(수정불가)로 이동하는걸로 바꾸기
+								var frm = document.regForm;
+								frm.action = &#x27;&lt;c:url value=&quot;/survey/onlnRcpt/getPbancInfoStng.do&quot; /&gt;&#x27;;
+								frm.submit();
+							});
+						}
+					} else {
+						alert(response.message || &#x27;저장 중 오류가 발생했습니다.&#x27;);
+					}
+				},
+				error : function(xhr, status, error) {
+					console.error(&#x27;Error:&#x27;, error);
+					alert(&#x27;저장 중 오류가 발생했습니다. 관리자에게 문의하세요.&#x27;);
+				}
+			});
+		}
+
+		// 기존 박스들에 대한 이벤트 핸들러 초기화
+		fn_initializeExistingBoxes();
+
+		var $container = $(&#x27;.response_writing_area&#x27;);
+
+		// 선택항목 추가 (객관식/체크박스)
+		$container
+				.on(
+						&#x27;click&#x27;,
+						&#x27;.add-option&#x27;,
+						function(e) {
+							var $box = $(this).closest(&#x27;.re_wr_box&#x27;);
+							var $optionList = $box.find(&#x27;ul&#x27;);
+							var optionCount = $optionList.children(&#x27;li&#x27;).length + 1;
+							var optionNm = &#x27;&#x27;;
+							if ($box.find(&#x27;.choice_sel_active&#x27;).attr(
+									&#x27;data-type&#x27;) === &#x27;checkbox&#x27;) {
+								optionNm = &#x27;체크항목&#x27;;
+							} else {
+								optionNm = &#x27;선택항목&#x27;;
+							}
+
+							var template = &#x27;&lt;li&gt;&#x27;
+									+ &#x27;&lt;input type=&quot;text&quot; class=&quot;option-text&quot; data-id=&quot;&quot; placeholder=&quot;&#x27; + optionNm + optionCount + &#x27;&quot; maxlength=&quot;80&quot;&gt;&#x27;
+									+ &#x27;&lt;button type=&quot;button&quot; class=&quot;delete-option&quot;&gt;&lt;i class=&quot;xi-trash-o&quot;&gt;&lt;/i&gt;&lt;/button&gt;&#x27;
+									+ &#x27;&lt;/li&gt;&#x27;;
+
+							$optionList.append(template);
+
+							// 체크박스인 경우 선택 가능 개수 업데이트
+							if ($box.find(&#x27;.choice_sel_active&#x27;).attr(
+									&#x27;data-type&#x27;) === &#x27;checkbox&#x27;) {
+								var $select = $box.find(&#x27;.checkbox-limit&#x27;);
+								fn_generateCheckboxLimitOptions($select[0],
+										optionCount);
+							}
+						});
+
+		// 질문 삭제
+		$container.on(&#x27;click&#x27;, &#x27;.delete-box&#x27;, function(e) {
+			var $box = $(this).closest(&#x27;.re_wr_box&#x27;);
+			var qitemId = $box.find(&#x27;.choice_sel_active&#x27;).data(&#x27;id&#x27;);
+
+			if (qitemId) {
+				var deletedQuest = {
+					qitemId : qitemId
+				};
+				deletedQuestList.push(deletedQuest);
+			}
+			$box.remove();
+		});
+
+		// 선택항목 삭제
+		$container
+				.on(&#x27;click&#x27;, &#x27;.delete-option&#x27;,
+						function(e) {
+							var $box = $(this).closest(&#x27;.re_wr_box&#x27;);
+							var $li = $(this).closest(&#x27;li&#x27;);
+							var anschcId = $li.find(&#x27;.option-text&#x27;).data(&#x27;id&#x27;);
+							var qitemId = $box.find(&#x27;.choice_sel_active&#x27;).data(
+									&#x27;id&#x27;);
+
+							if (anschcId) {
+								var deletedOptions = {
+									qitemId : qitemId,
+									anschcId : anschcId
+								};
+								deletedQuestList.push(deletedOptions);
+							}
+
+							$li.remove();
+
+							// 체크박스인 경우 선택 가능 개수 업데이트
+							if ($box.find(&#x27;.choice_sel_active&#x27;).attr(
+									&#x27;data-type&#x27;) === &#x27;checkbox&#x27;) {
+								var $select = $box.find(&#x27;.checkbox-limit&#x27;);
+								var remainingOptions = $box
+										.find(&#x27;.option-text&#x27;).length;
+								fn_generateCheckboxLimitOptions($select[0],
+										remainingOptions);
+							}
+						});
+
+		// 질문 유형 선택 토글
+		$container.on(&#x27;click&#x27;, &#x27;.choice_sel_active&#x27;,
+				function(e) {
+					var $list = $(this).closest(&#x27;.choice_sel&#x27;).find(
+							&#x27;.choice_sel_list&#x27;);
+					$(&#x27;.choice_sel_list&#x27;).not($list).hide();
+					$list.toggle();
+				});
+
+		// 질문 유형 변경
+		$container
+				.on(
+						&#x27;click&#x27;,
+						&#x27;.choice_sel_list button&#x27;,
+						function() {
+							var $box = $(this).closest(&#x27;.re_wr_box&#x27;);
+							var type = $(this).attr(&#x27;data-type&#x27;);
+
+							// 저장되어 있는 응답항목일 경우 기존 응답항목 삭제
+							if ($box.attr(&#x27;id&#x27;)) {
+								// 1. 해당박스의 id를 deletedQuestList 에 넣기
+								var qitemId = $box.find(&#x27;.choice_sel_active&#x27;)
+										.data(&#x27;id&#x27;);
+
+								if (qitemId) {
+									var deletedQuest = {
+										qitemId : qitemId
+									}
+									deletedQuestList.push(deletedQuest);
+								}
+
+								// 2. 해당박스의 id와 셀렉트박스의 data-id를 빈값으로 변경
+								$box.removeAttr(&#x27;id&#x27;);
+								$box.find(&#x27;.choice_sel_active&#x27;).removeAttr(
+										&#x27;data-id&#x27;);
+							}
+
+							// 질문 유형에 따른 UI 업데이트
+							var $active = $box.find(&#x27;.choice_sel_active&#x27;);
+							$active.html($(this).html())
+									.attr(&#x27;data-type&#x27;, type);
+							$box.find(&#x27;.choice_sel_list&#x27;).hide();
+
+							// 질문 유형에 따른 입력 영역 변경
+							var $con = $box.find(&#x27;.choice_text_con&#x27;);
+							switch (type) {
+							case &#x27;subjective&#x27;:
+							case &#x27;long&#x27;:
+								$con
+										.html(&#x27;&lt;ul&gt;&lt;li&gt;&#x27;
+												+ &#x27;&lt;label&gt;최대 글자 수: &lt;/label&gt;&#x27;
+												+ &#x27;&lt;select class=&quot;text-limit w20&quot; name=&quot;text_limit&quot;&gt;&lt;/select&gt;&#x27;
+												+ &#x27;&lt;/li&gt;&lt;/ul&gt;&#x27;);
+								fn_generateTextLimitOptions($con
+										.find(&#x27;.text-limit&#x27;)[0]);
+								break;
+							case &#x27;objective&#x27;:
+							case &#x27;checkbox&#x27;:
+								var template = &#x27;&lt;div class=&quot;choice_text_&#x27;
+										+ (type === &#x27;objective&#x27; ? &#x27;radio&#x27;
+												: &#x27;check&#x27;)
+										+ &#x27;&quot;&gt;&#x27;
+										+ &#x27;&lt;ul&gt;&lt;li&gt;&#x27;
+										+ &#x27;&lt;input type=&quot;text&quot; class=&quot;option-text&quot; data-id=&quot;&quot; placeholder=&quot;&#x27;
+										+ (type === &#x27;objective&#x27; ? &#x27;선택항목1&#x27;
+												: &#x27;체크항목1&#x27;)
+										+ &#x27;&quot; maxlength=&quot;80&quot;&gt;&#x27;
+										+ &#x27;&lt;button type=&quot;button&quot; class=&quot;delete-option&quot;&gt;&lt;i class=&quot;xi-trash-o&quot;&gt;&lt;/i&gt;&lt;/button&gt;&#x27;
+										+ &#x27;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&#x27;
+										+ &#x27;&lt;div class=&quot;choice_text_btn&quot;&gt;&#x27;
+										+ &#x27;&lt;button type=&quot;button&quot; class=&quot;btn_base bg_gray add-option&quot;&gt;선택항목 추가&lt;/button&gt;&#x27;
+										+ &#x27;&lt;/div&gt;&#x27;;
+
+								if (type === &#x27;checkbox&#x27;) {
+									template += &#x27;&lt;div class=&quot;checkbox-limit-wrap mt10&quot;&gt;&#x27;
+											+ &#x27;&lt;label&gt;체크 가능 개수: &lt;/label&gt;&#x27;
+											+ &#x27;&lt;select class=&quot;checkbox-limit w20&quot; name=&quot;checkbox_limit&quot;&gt;&lt;/select&gt;&#x27;
+											+ &#x27;&lt;/div&gt;&#x27;;
+								}
+								$con.html(template);
+
+								// 체크박스인 경우 선택 가능 개수 드롭다운 초기화
+								if (type === &#x27;checkbox&#x27;) {
+									var optionCount = $con.find(&#x27;.option-text&#x27;).length;
+									fn_generateCheckboxLimitOptions($con
+											.find(&#x27;.checkbox-limit&#x27;)[0],
+											optionCount);
+								}
+								break;
+							case &#x27;file&#x27;:
+								$con
+										.html(&#x27;&lt;ul&gt;&lt;li&gt;&#x27;
+												+ &#x27;&lt;input type=&quot;text&quot; class=&quot;file-extn-lmt&quot; placeholder=&quot;(미입력시 전체) 업로드 가능한 확장자를 입력해주세요. ex) ppt, zip&quot; maxlength=&quot;80&quot;&gt;&#x27;
+												+ &#x27;&lt;/li&gt;&lt;/ul&gt;&#x27;);
+								break;
+							}
+						});
+
+		// 질문 복제
+		$container.on(&#x27;click&#x27;, &#x27;.duplicate-box&#x27;, function(e) {
+			var $original = $(this).closest(&#x27;.re_wr_box&#x27;);
+			var $clone = $original.clone(false); // false로 이벤트 복제 방지
+
+			// id, data-id, 선택항목들의 data-id 제거
+			$clone.removeAttr(&#x27;id&#x27;);
+			$clone.find(&#x27;.choice_sel_active&#x27;).removeAttr(&#x27;data-id&#x27;);
+			$clone.find(&#x27;.option-text&#x27;).removeAttr(&#x27;data-id&#x27;);
+
+			$original.after($clone);
+			fn_initializeBox($clone);
+		});
+
+		// 다른 영역 클릭 시 선택 목록 숨기기
+		$(document).on(&#x27;click&#x27;, function(e) {
+			if (!$(e.target).closest(&#x27;.choice_sel&#x27;).length) {
+				$(&#x27;.choice_sel_list&#x27;).hide();
+			}
+		});
+
+		// 응답항목 영역을 sortable로 초기화하여 드래그 앤 드롭 기능 활성화
+		$(&#x27;.response_writing_area&#x27;).sortable({
+			handle : &#x27;.re_wr_box_move&#x27;, // 드래그 핸들러로 사용할 요소
+			placeholder : &#x27;sort-placeholder&#x27;, // 드래그 중 위치 표시자
+			opacity : 0.6, // 드래그 중인 항목의 투명도
+			cursor : &#x27;move&#x27;, // 드래그 시 커서 모양
+			update : function(event, ui) {
+				// 드래그 앤 드롭 완료 후 실행될 콜백
+				console.log(&#x27;항목 순서가 변경되었습니다.&#x27;);
+			}
+		});
+
+		// 드래그 핸들러 표시/숨김 처리
+		$container.on({
+			mouseenter : function() {
+				$(this).find(&#x27;.re_wr_box_move&#x27;).show();
+			},
+			mouseleave : function() {
+				$(this).find(&#x27;.re_wr_box_move&#x27;).hide();
+			}
+		}, &#x27;.re_wr_box&#x27;);
+
+		// 새 질문 박스 추가 함수
+		function fn_addNewQuestionBox(type) {
+			var template = &#x27;&#x27;;
+			// 객관식 질문
+			if (type === &#x27;objective&#x27;) {
+				template = &#x27;&lt;div class=&quot;re_wr_box&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;re_wr_box_move&quot; style=&quot;display: none;&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;&quot;&gt;&lt;/i&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;jb-text&quot;&gt;&#x27;
+						+ &#x27;&lt;p&gt;드래그이동&lt;/p&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_box&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_active&quot; data-type=&quot;objective&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-radiobox-checked&quot;&gt;&lt;/i&gt;객관식 질문&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;switch_box&quot;&gt;&#x27;
+						+ &#x27;&lt;strong&gt;필수&lt;/strong&gt;&#x27;
+						+ &#x27;&lt;label class=&quot;switch&quot;&gt;&#x27;
+						+ &#x27;&lt;input type=&quot;checkbox&quot; class=&quot;switch-input&quot; checked&gt;&#x27;
+						+ &#x27;&lt;span class=&quot;switch-label&quot; data-on=&quot;필수&quot; data-off=&quot;선택&quot;&gt;&lt;/span&gt;&#x27;
+						+ &#x27;&lt;span class=&quot;switch-handle&quot;&gt;&lt;/span&gt;&#x27;
+						+ &#x27;&lt;/label&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_util&quot;&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;duplicate-box&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-documents-o&quot;&gt;&lt;/i&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;jb-text&quot;&gt;&lt;p&gt;질문 복제&lt;/p&gt;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;delete-box&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-trash-o&quot;&gt;&lt;/i&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;jb-text&quot;&gt;&lt;p&gt;질문 삭제&lt;/p&gt;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_wrap&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_title&quot;&gt;&#x27;
+						+ &#x27;&lt;textarea class=&quot;question-title&quot; placeholder=&quot;질문을 입력해주세요.&quot; maxlength=&quot;2000&quot;&gt;&lt;/textarea&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_con&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_radio&quot;&gt;&#x27;
+						+ &#x27;&lt;ul&gt;&#x27;
+						+ &#x27;&lt;li&gt;&#x27;
+						+ &#x27;&lt;input type=&quot;text&quot; class=&quot;option-text&quot; placeholder=&quot;항목1&quot; maxlength=&quot;80&quot;&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;delete-option&quot;&gt;&lt;i class=&quot;xi-trash-o&quot;&gt;&lt;/i&gt;&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/li&gt;&#x27;
+						+ &#x27;&lt;/ul&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_btn&quot;&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;btn_base bg_gray add-option&quot;&gt;선택항목 추가&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27; + &#x27;&lt;/div&gt;&#x27; + &#x27;&lt;/div&gt;&#x27;;
+			} else if (type === &#x27;subjective&#x27;) {
+				// 단답형 질문
+				template = &#x27;&lt;div class=&quot;re_wr_box&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;re_wr_box_move&quot; style=&quot;display: none;&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;&quot;&gt;&lt;/i&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;jb-text&quot;&gt;&lt;p&gt;드래그이동&lt;/p&gt;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_box&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_active&quot; data-type=&quot;subjective&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-drag-handle&quot;&gt;&lt;/i&gt;단답형&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;switch_box&quot;&gt;&#x27;
+						+ &#x27;&lt;strong&gt;필수&lt;/strong&gt;&#x27;
+						+ &#x27;&lt;label class=&quot;switch&quot;&gt;&#x27;
+						+ &#x27;&lt;input type=&quot;checkbox&quot; class=&quot;switch-input&quot; checked&gt;&#x27;
+						+ &#x27;&lt;span class=&quot;switch-label&quot; data-on=&quot;필수&quot; data-off=&quot;선택&quot;&gt;&lt;/span&gt;&#x27;
+						+ &#x27;&lt;span class=&quot;switch-handle&quot;&gt;&lt;/span&gt;&#x27;
+						+ &#x27;&lt;/label&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_list&quot; style=&quot;display: none;&quot;&gt;&#x27;
+						+ &#x27;&lt;div&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;subjective&quot;&gt;&lt;i class=&quot;xi-drag-handle&quot;&gt;&lt;/i&gt;단답형&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;long&quot;&gt;&lt;i class=&quot;xi-align-left&quot;&gt;&lt;/i&gt;장문형&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;objective&quot;&gt;&lt;i class=&quot;xi-radiobox-checked&quot;&gt;&lt;/i&gt;객관식 질문&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;checkbox&quot;&gt;&lt;i class=&quot;xi-check-square-o&quot;&gt;&lt;/i&gt;체크박스&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;file&quot;&gt;&lt;i class=&quot;xi-cloud-upload-o&quot;&gt;&lt;/i&gt;파일 업로드&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_util&quot;&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;duplicate-box&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-documents-o&quot;&gt;&lt;/i&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;jb-text&quot;&gt;&lt;p&gt;질문 복제&lt;/p&gt;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;delete-box&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-trash-o&quot;&gt;&lt;/i&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;jb-text&quot;&gt;&lt;p&gt;질문 삭제&lt;/p&gt;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_wrap&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_title&quot;&gt;&#x27;
+						+ &#x27;&lt;textarea class=&quot;question-title&quot; placeholder=&quot;질문을 입력해주세요.&quot; maxlength=&quot;2000&quot;&gt;&lt;/textarea&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_con&quot;&gt;&#x27;
+						+ &#x27;&lt;ul&gt;&lt;li&gt;&#x27;
+						+ &#x27;&lt;label&gt;최대 글자 수: &lt;/label&gt;&#x27;
+						+ &#x27;&lt;select class=&quot;text-limit w20&quot; name=&quot;text_limit&quot;&gt;&lt;/select&gt;&#x27;
+						+ &#x27;&lt;/li&gt;&lt;/ul&gt;&#x27; + &#x27;&lt;/div&gt;&#x27; + &#x27;&lt;/div&gt;&#x27; + &#x27;&lt;/div&gt;&#x27;;
+			} else if (type === &#x27;long&#x27;) {
+				// 장문형 질문
+				template = &#x27;&lt;div class=&quot;re_wr_box&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_box&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_active&quot; data-type=&quot;long&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-align-left&quot;&gt;&lt;/i&gt;장문형&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;switch_box&quot;&gt;&#x27;
+						+ &#x27;&lt;strong&gt;필수&lt;/strong&gt;&#x27;
+						+ &#x27;&lt;label class=&quot;switch&quot;&gt;&#x27;
+						+ &#x27;&lt;input type=&quot;checkbox&quot; class=&quot;switch-input&quot; checked&gt;&#x27;
+						+ &#x27;&lt;span class=&quot;switch-label&quot; data-on=&quot;필수&quot; data-off=&quot;선택&quot;&gt;&lt;/span&gt;&#x27;
+						+ &#x27;&lt;span class=&quot;switch-handle&quot;&gt;&lt;/span&gt;&#x27;
+						+ &#x27;&lt;/label&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_list&quot; style=&quot;display: none;&quot;&gt;&#x27;
+						+ &#x27;&lt;div&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;subjective&quot;&gt;&lt;i class=&quot;xi-drag-handle&quot;&gt;&lt;/i&gt;단답형&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;long&quot;&gt;&lt;i class=&quot;xi-align-left&quot;&gt;&lt;/i&gt;장문형&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;objective&quot;&gt;&lt;i class=&quot;xi-radiobox-checked&quot;&gt;&lt;/i&gt;객관식 질문&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;checkbox&quot;&gt;&lt;i class=&quot;xi-check-square-o&quot;&gt;&lt;/i&gt;체크박스&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;file&quot;&gt;&lt;i class=&quot;xi-cloud-upload-o&quot;&gt;&lt;/i&gt;파일 업로드&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_util&quot;&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;duplicate-box&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-documents-o&quot;&gt;&lt;/i&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;jb-text&quot;&gt;&lt;p&gt;질문 복제&lt;/p&gt;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;delete-box&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-trash-o&quot;&gt;&lt;/i&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;jb-text&quot;&gt;&lt;p&gt;질문 삭제&lt;/p&gt;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_wrap&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_title&quot;&gt;&#x27;
+						+ &#x27;&lt;textarea class=&quot;question-title&quot; placeholder=&quot;질문을 입력해주세요.&quot; maxlength=&quot;2000&quot;&gt;&lt;/textarea&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_con&quot;&gt;&#x27;
+						+ &#x27;&lt;ul&gt;&lt;li&gt;&#x27;
+						+ &#x27;&lt;label&gt;최대 글자 수: &lt;/label&gt;&#x27;
+						+ &#x27;&lt;select class=&quot;text-limit w20&quot; name=&quot;text_limit&quot;&gt;&lt;/select&gt;&#x27;
+						+ &#x27;&lt;/li&gt;&lt;/ul&gt;&#x27; + &#x27;&lt;/div&gt;&#x27; + &#x27;&lt;/div&gt;&#x27; + &#x27;&lt;/div&gt;&#x27;;
+			} else if (type === &#x27;file&#x27;) {
+				// 파일 업로드 질문
+				template = &#x27;&lt;div class=&quot;re_wr_box&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_box&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_active&quot; data-type=&quot;file&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-cloud-upload-o&quot;&gt;&lt;/i&gt;파일 업로드&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;switch_box&quot;&gt;&#x27;
+						+ &#x27;&lt;strong&gt;필수&lt;/strong&gt;&#x27;
+						+ &#x27;&lt;label class=&quot;switch&quot;&gt;&#x27;
+						+ &#x27;&lt;input type=&quot;checkbox&quot; class=&quot;switch-input&quot; checked&gt;&#x27;
+						+ &#x27;&lt;span class=&quot;switch-label&quot; data-on=&quot;필수&quot; data-off=&quot;선택&quot;&gt;&lt;/span&gt;&#x27;
+						+ &#x27;&lt;span class=&quot;switch-handle&quot;&gt;&lt;/span&gt;&#x27;
+						+ &#x27;&lt;/label&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_list&quot; style=&quot;display: none;&quot;&gt;&#x27;
+						+ &#x27;&lt;div&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;subjective&quot;&gt;&lt;i class=&quot;xi-drag-handle&quot;&gt;&lt;/i&gt;단답형&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;long&quot;&gt;&lt;i class=&quot;xi-align-left&quot;&gt;&lt;/i&gt;장문형&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;objective&quot;&gt;&lt;i class=&quot;xi-radiobox-checked&quot;&gt;&lt;/i&gt;객관식 질문&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;checkbox&quot;&gt;&lt;i class=&quot;xi-check-square-o&quot;&gt;&lt;/i&gt;체크박스&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;file&quot;&gt;&lt;i class=&quot;xi-cloud-upload-o&quot;&gt;&lt;/i&gt;파일 업로드&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_util&quot;&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;duplicate-box&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-documents-o&quot;&gt;&lt;/i&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;jb-text&quot;&gt;&lt;p&gt;질문 복제&lt;/p&gt;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;delete-box&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-trash-o&quot;&gt;&lt;/i&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;jb-text&quot;&gt;&lt;p&gt;질문 삭제&lt;/p&gt;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_wrap&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_title&quot;&gt;&#x27;
+						+ &#x27;&lt;textarea class=&quot;question-title&quot; placeholder=&quot;질문을 입력해주세요.&quot; maxlength=&quot;2000&quot;&gt;&lt;/textarea&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_con&quot;&gt;&#x27;
+						+ &#x27;&lt;ul&gt;&lt;li&gt;&#x27;
+						+ &#x27;&lt;input type=&quot;text&quot; class=&quot;file-extn-lmt&quot; placeholder=&quot;(미입력시 전체) 업로드 가능한 확장자를 입력해주세요. ex) ppt, zip&quot; maxlength=&quot;80&quot;&gt;&#x27;
+						+ &#x27;&lt;/li&gt;&lt;/ul&gt;&#x27; + &#x27;&lt;/div&gt;&#x27; + &#x27;&lt;/div&gt;&#x27; + &#x27;&lt;/div&gt;&#x27;;
+			} else if (type === &#x27;checkbox&#x27;) {
+				// 체크박스 질문
+				template = &#x27;&lt;div class=&quot;re_wr_box&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;re_wr_box_move&quot; style=&quot;display: none;&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;&quot;&gt;&lt;/i&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;jb-text&quot;&gt;&lt;p&gt;드래그이동&lt;/p&gt;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_box&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_active&quot; data-type=&quot;checkbox&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-check-square-o&quot;&gt;&lt;/i&gt;체크박스&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;switch_box&quot;&gt;&#x27;
+						+ &#x27;&lt;strong&gt;필수&lt;/strong&gt;&#x27;
+						+ &#x27;&lt;label class=&quot;switch&quot;&gt;&#x27;
+						+ &#x27;&lt;input type=&quot;checkbox&quot; class=&quot;switch-input&quot; checked&gt;&#x27;
+						+ &#x27;&lt;span class=&quot;switch-label&quot; data-on=&quot;필수&quot; data-off=&quot;선택&quot;&gt;&lt;/span&gt;&#x27;
+						+ &#x27;&lt;span class=&quot;switch-handle&quot;&gt;&lt;/span&gt;&#x27;
+						+ &#x27;&lt;/label&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_list&quot; style=&quot;display: none;&quot;&gt;&#x27;
+						+ &#x27;&lt;div&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;subjective&quot;&gt;&lt;i class=&quot;xi-drag-handle&quot;&gt;&lt;/i&gt;단답형&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;long&quot;&gt;&lt;i class=&quot;xi-align-left&quot;&gt;&lt;/i&gt;장문형&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;objective&quot;&gt;&lt;i class=&quot;xi-radiobox-checked&quot;&gt;&lt;/i&gt;객관식 질문&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;checkbox&quot;&gt;&lt;i class=&quot;xi-check-square-o&quot;&gt;&lt;/i&gt;체크박스&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;file&quot;&gt;&lt;i class=&quot;xi-cloud-upload-o&quot;&gt;&lt;/i&gt;파일 업로드&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_util&quot;&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;duplicate-box&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-documents-o&quot;&gt;&lt;/i&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;jb-text&quot;&gt;&lt;p&gt;질문 복제&lt;/p&gt;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;delete-box&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-trash-o&quot;&gt;&lt;/i&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;jb-text&quot;&gt;&lt;p&gt;질문 삭제&lt;/p&gt;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_wrap&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_title&quot;&gt;&#x27;
+						+ &#x27;&lt;textarea class=&quot;question-title&quot; placeholder=&quot;질문을 입력해주세요.&quot; maxlength=&quot;2000&quot;&gt;&lt;/textarea&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_con&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_check&quot;&gt;&#x27;
+						+ &#x27;&lt;ul&gt;&#x27;
+						+ &#x27;&lt;li&gt;&#x27;
+						+ &#x27;&lt;input type=&quot;text&quot; class=&quot;option-text&quot; placeholder=&quot;체크항목1&quot; maxlength=&quot;80&quot;&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;delete-option&quot;&gt;&lt;i class=&quot;xi-trash-o&quot;&gt;&lt;/i&gt;&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/li&gt;&#x27;
+						+ &#x27;&lt;/ul&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_btn&quot;&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;btn_base bg_gray add-option&quot;&gt;선택항목 추가&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;checkbox-limit-wrap mt10&quot;&gt;&#x27;
+						+ &#x27;&lt;label&gt;체크 가능 개수: &lt;/label&gt;&#x27;
+						+ &#x27;&lt;select class=&quot;checkbox-limit w20&quot; name=&quot;checkbox_limit&quot;&gt;&lt;/select&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27; + &#x27;&lt;/div&gt;&#x27; + &#x27;&lt;/div&gt;&#x27;;
+			} else if (type === &#x27;dropDown&#x27;) {
+				// 드롭다운 질문
+				template = &#x27;&lt;div class=&quot;re_wr_box_move&quot; style=&quot;display: none;&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;&quot;&gt;&lt;/i&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;jb-text&quot;&gt;&lt;p&gt;드래그이동&lt;/p&gt;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_box&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_active&quot; data-type=&quot;dropDown&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-caret-down-min&quot;&gt;&lt;/i&gt;드롭다운&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;switch_box&quot;&gt;&#x27;
+						+ &#x27;&lt;strong&gt;필수&lt;/strong&gt;&#x27;
+						+ &#x27;&lt;label class=&quot;switch&quot;&gt;&#x27;
+						+ &#x27;&lt;input type=&quot;checkbox&quot; class=&quot;switch-input&quot; checked&gt;&#x27;
+						+ &#x27;&lt;span class=&quot;switch-label&quot; data-on=&quot;필수&quot; data-off=&quot;선택&quot;&gt;&lt;/span&gt;&#x27;
+						+ &#x27;&lt;span class=&quot;switch-handle&quot;&gt;&lt;/span&gt;&#x27;
+						+ &#x27;&lt;/label&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_list&quot; style=&quot;display: none;&quot;&gt;&#x27;
+						+ &#x27;&lt;div&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;subjective&quot;&gt;&lt;i class=&quot;xi-drag-handle&quot;&gt;&lt;/i&gt;단답형&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;long&quot;&gt;&lt;i class=&quot;xi-align-left&quot;&gt;&lt;/i&gt;장문형&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;objective&quot;&gt;&lt;i class=&quot;xi-radiobox-checked&quot;&gt;&lt;/i&gt;객관식 질문&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;checkbox&quot;&gt;&lt;i class=&quot;xi-check-square-o&quot;&gt;&lt;/i&gt;체크박스&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;dropDown&quot;&gt;&lt;i class=&quot;xi-caret-down-min&quot;&gt;&lt;/i&gt;드롭다운&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; data-type=&quot;file&quot;&gt;&lt;i class=&quot;xi-cloud-upload-o&quot;&gt;&lt;/i&gt;파일 업로드&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_sel_util&quot;&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;duplicate-box&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-documents-o&quot;&gt;&lt;/i&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;jb-text&quot;&gt;&lt;p&gt;질문 복제&lt;/p&gt;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/button&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;delete-box&quot;&gt;&#x27;
+						+ &#x27;&lt;i class=&quot;xi-trash-o&quot;&gt;&lt;/i&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;jb-text&quot;&gt;&lt;p&gt;질문 삭제&lt;/p&gt;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_wrap&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_title&quot;&gt;&#x27;
+						+ &#x27;&lt;textarea class=&quot;question-title&quot; placeholder=&quot;질문을 입력해주세요.&quot; maxlength=&quot;2000&quot;&gt;&lt;/textarea&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_con&quot;&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_dropdown&quot;&gt;&#x27;
+						+ &#x27;&lt;ul&gt;&#x27;
+						+ &#x27;&lt;li&gt;&#x27;
+						+ &#x27;&lt;input type=&quot;text&quot; class=&quot;option-text&quot; placeholder=&quot;드롭다운 항목1&quot; maxlength=&quot;80&quot;&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;delete-option&quot;&gt;&lt;i class=&quot;xi-trash-o&quot;&gt;&lt;/i&gt;&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/li&gt;&#x27;
+						+ &#x27;&lt;/ul&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27;
+						+ &#x27;&lt;div class=&quot;choice_text_btn&quot;&gt;&#x27;
+						+ &#x27;&lt;button type=&quot;button&quot; class=&quot;btn_base bg_gray add-option&quot;&gt;드롭다운 항목 추가&lt;/button&gt;&#x27;
+						+ &#x27;&lt;/div&gt;&#x27; + &#x27;&lt;/div&gt;&#x27; + &#x27;&lt;/div&gt;&#x27;;
+			}
+
+			var $newBox = $(template);
+			$(&#x27;.response_writing_area&#x27;).append($newBox);
+			fn_initializeBox($newBox);
+
+			// 새로 생성된 박스 반환
+			return $newBox;
+		}
+
+		// 박스 초기화 함수
+		function fn_initializeBox($box) {
+			// 체크박스인 경우 선택 가능 개수 드롭다운 초기화
+			if ($box.find(&#x27;.choice_sel_active&#x27;).attr(&#x27;data-type&#x27;) === &#x27;checkbox&#x27;) {
+				var $select = $box.find(&#x27;.checkbox-limit&#x27;);
+				var optionCount = $box.find(&#x27;.option-text&#x27;).length;
+				fn_generateCheckboxLimitOptions($select[0], optionCount);
+			}
+
+			// 단답형/장문형인 경우 글자수 제한 드롭다운 초기화
+			if ([ &#x27;subjective&#x27;, &#x27;long&#x27; ].includes($box.find(
+					&#x27;.choice_sel_active&#x27;).attr(&#x27;data-type&#x27;))) {
+				var $select = $box.find(&#x27;.text-limit&#x27;);
+				fn_generateTextLimitOptions($select[0]);
+			}
+		}
+
+		// 드롭다운 옵션 생성 함수
+		function fn_generateTextLimitOptions(select) {
+			const currentValue = $(select).val(); // 현재 선택된 값 저장
+			select.innerHTML = &#x27;&#x27;; // 기존 옵션 초기화
+			// 100부터 1500까지 100단위로 옵션 추가
+			for (let i = 100; i &lt;= 1500; i += 100) {
+				const option = document.createElement(&#x27;option&#x27;);
+				option.value = i;
+				option.textContent = i + &#x27;자&#x27;;
+
+				// 이전 선택값과 같으면 selected 속성 추가
+				if (currentValue == i) {
+					option.selected = true;
+				}
+				select.appendChild(option);
+			}
+		}
+
+		/// 체크박스 선택 개수 드롭다운 옵션 생성 함수
+		function fn_generateCheckboxLimitOptions(select, totalOptions) {
+			const currentValue = $(select).val(); // 현재 선택된 값 저장
+			select.innerHTML = &#x27;&#x27;; // 기존 옵션 초기화
+			for (let i = 1; i &lt;= totalOptions; i++) {
+				const option = document.createElement(&#x27;option&#x27;);
+				option.value = i;
+				option.textContent = i + &#x27;개&#x27;;
+
+				// 이전 선택값과 같으면 selected 속성 추가
+				if (currentValue == i) {
+					option.selected = true;
+				}
+				select.appendChild(option);
+			}
+		}
+
+		// 응답항목 추가 버튼 클릭 이벤트
+		$(document).off(&#x27;click&#x27;, &#x27;.app_btn&#x27;).on(&#x27;click&#x27;, &#x27;.app_btn&#x27;,
+				function() {
+					const $newBox = $(fn_addNewQuestionBox(&#x27;subjective&#x27;));
+
+					if ($newBox &amp;&amp; $newBox.length) {
+						const select = $newBox.find(&#x27;.text-limit&#x27;)[0];
+						if (select &amp;&amp; select.options.length === 0) {
+							fn_generateTextLimitOptions(select);
+						}
+
+						// 새로 추가된 박스로 스크롤
+						$(&#x27;html, body&#x27;).animate({
+							scrollTop : $newBox.offset().top - 100
+						}, 500);
+
+						// 질문 입력 필드에 포커스
+						$newBox.find(&#x27;.question-title&#x27;).focus();
+					}
+
+					return false;
+				});
+
+		// 기존 박스들 초기화
+		function fn_initializeExistingBoxes() {
+			$(&#x27;.re_wr_box&#x27;).each(function() {
+				fn_initializeBox($(this));
+			});
+		}
+
+		// 개인정보 항목 설정 체크 여부 확인 함수
+		function isPersonalInfoEnabled(artclCd) {
+			return $(&#x27;#useYn_&#x27; + artclCd).is(&#x27;:checked&#x27;);
+		}
+
+		// 필수 체크박스 클릭 이벤트 핸들러
+		$(&#x27;[id^=esntlYn_]&#x27;).click(function(e) {
+			var artclCd = this.id.split(&#x27;_&#x27;)[1];
+			if (!isPersonalInfoEnabled(artclCd)) {
+				e.preventDefault(); // 체크 동작 방지
+				alert(&#x27;체크박스를 클릭하여 해당 개인정보 항목을 활성화 해주시기 바랍니다.&#x27;);
+				return false;
+			}
+
+		});
+
+		// 설정(useYn) 체크박스가 해제될 때 필수 체크도 함께 해제
+		$(&#x27;[id^=useYn_]&#x27;).change(function() {
+			var artclCd = this.id.split(&#x27;_&#x27;)[1];
+			if (!this.checked) {
+				$(&#x27;#esntlYn_&#x27; + artclCd).prop(&#x27;checked&#x27;, false);
+			}
+		});
+
+		// textarea 글자수 제한
+		$(document).on(&#x27;input&#x27;, &#x27;.question-title&#x27;, function() {
+			var maxLength = 2000;
+			var currentLength = $(this).val().length;
+
+			if (currentLength &gt; maxLength) {
+				// 2000자를 초과하는 입력 제한
+				$(this).val($(this).val().substring(0, maxLength));
+				alert(&#x27;최대 2000자까지 입력 가능합니다.&#x27;);
+			}
+		});
+
+	});
+
+	function fn_popup(url) {
+		const windowFeatures = &quot;left=100,top=100,width=1200,height=900&quot;;
+		window.open(url, &#x27;_blank&#x27;, windowFeatures);
+	}
+&lt;/script&gt;
+
+
+&lt;section id=&quot;sub_contents_wrap&quot;&gt;
+	&lt;%@ include file=&quot;/WEB-INF/views/templates/kosac/location_system.jsp&quot;%&gt;
+	&lt;div class=&quot;sub_contents&quot;&gt;
+		&lt;!-- 좌측메뉴 펼치기 영역 --&gt;
+		&lt;div class=&quot;left_menu_block&quot; style=&quot;display: none;&quot;&gt;
+			&lt;button role=&quot;button&quot;&gt;
+				&lt;i class=&quot;xi-angle-right-min&quot;&gt;&lt;span class=&quot;hide&quot;&gt;메뉴 펼치기&lt;/span&gt;&lt;/i&gt;
+			&lt;/button&gt;
+		&lt;/div&gt;
+		&lt;div class=&quot;sub_tab_box_1type&quot;&gt;
+			&lt;ul&gt;
+				&lt;li&gt;&lt;button type=&quot;button&quot; class=&quot;btn-tab&quot; id=&quot;btnPbanc&quot;&gt;공고정보설정&lt;/button&gt;&lt;/li&gt;
+				&lt;li class=&quot;active&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;btn-tab&quot;&gt;응답항목설정&lt;/button&gt;&lt;/li&gt;
+			&lt;/ul&gt;
+		&lt;/div&gt;
+		&lt;div class=&quot;sub_con_box&quot;&gt;
+			&lt;div class=&quot;sub_title&quot;&gt;
+				&lt;h2&gt;개인정보 항목설정&lt;/h2&gt;
+			&lt;/div&gt;
+			&lt;form:form modelAttribute=&quot;resultVO&quot; id=&quot;regForm&quot; name=&quot;regForm&quot;&gt;
+				&lt;form:hidden path=&quot;pbancNo&quot; value=&quot;${resultVO.pbancNo}&quot; /&gt;
+				&lt;form:hidden path=&quot;pbancNm&quot; value=&quot;${resultVO.pbancNm}&quot; /&gt;
+				&lt;input type=&quot;hidden&quot; name=&quot;picYn&quot; id=&quot;picYn&quot;
+					value=&quot;${pbancInfo.picYn}&quot; /&gt;
+				&lt;div class=&quot;new_ice_join_withd_box peros_info_wrap&quot;&gt;
+					&lt;div class=&quot;peros_info_box&quot;&gt;
+
+						&lt;c:forEach items=&quot;${privacyArticleSettings}&quot; var=&quot;rs&quot;
+							varStatus=&quot;varstatus&quot;&gt;
+							&lt;c:set var=&quot;useYn&quot; value=&quot;${rs.useYn}&quot; /&gt;
+							&lt;c:set var=&quot;esntlYn&quot; value=&quot;${rs.esntlYn}&quot; /&gt;
+							&lt;c:choose&gt;
+								&lt;c:when test=&quot;${rs.artclCd eq &#x27;E01A03A01&#x27;}&quot;&gt;
+									&lt;c:set var=&quot;iclass&quot; value=&quot;xi-user-o&quot; /&gt;
+									&lt;c:set var=&quot;useYn&quot; value=&quot;Y&quot; /&gt;
+									&lt;c:set var=&quot;esntlYn&quot; value=&quot;Y&quot; /&gt;
+								&lt;/c:when&gt;
+								&lt;c:when test=&quot;${rs.artclCd eq &#x27;E01A03A02&#x27;}&quot;&gt;
+									&lt;c:set var=&quot;iclass&quot; value=&quot;xi-mail-o&quot; /&gt;
+									&lt;c:set var=&quot;useYn&quot; value=&quot;Y&quot; /&gt;
+									&lt;c:set var=&quot;esntlYn&quot; value=&quot;Y&quot; /&gt;
+								&lt;/c:when&gt;
+								&lt;c:when test=&quot;${rs.artclCd eq &#x27;E01A03A03&#x27;}&quot;&gt;
+									&lt;c:set var=&quot;iclass&quot; value=&quot;xi-lock-o&quot; /&gt;
+								&lt;/c:when&gt;
+								&lt;c:when test=&quot;${rs.artclCd eq &#x27;E01A03A04&#x27;}&quot;&gt;
+									&lt;c:set var=&quot;iclass&quot; value=&quot;xi-heart-o&quot; /&gt;
+								&lt;/c:when&gt;
+								&lt;c:when test=&quot;${rs.artclCd eq &#x27;E01A03A05&#x27;}&quot;&gt;
+									&lt;c:set var=&quot;iclass&quot; value=&quot;xi-comment-o&quot; /&gt;
+								&lt;/c:when&gt;
+								&lt;c:when test=&quot;${rs.artclCd eq &#x27;E01A03A06&#x27;}&quot;&gt;
+									&lt;c:set var=&quot;iclass&quot; value=&quot;xi-document&quot; /&gt;
+								&lt;/c:when&gt;
+								&lt;c:when test=&quot;${rs.artclCd eq &#x27;E01A03A07&#x27;}&quot;&gt;
+									&lt;c:set var=&quot;iclass&quot; value=&quot;xi-tablet&quot; /&gt;
+								&lt;/c:when&gt;
+								&lt;c:when test=&quot;${rs.artclCd eq &#x27;E01A03A08&#x27;}&quot;&gt;
+									&lt;c:set var=&quot;iclass&quot; value=&quot;xi-mobile&quot; /&gt;
+								&lt;/c:when&gt;
+							&lt;/c:choose&gt;
+							&lt;div class=&quot;join_infoBox&quot;&gt;
+								&lt;p class=&quot;join_title&quot;&gt;
+									&lt;i class=&quot;${iclass}&quot;&gt;&lt;/i&gt;&lt;label for=&quot;useYn_${rs.artclCd}&quot;&gt;&lt;c:out
+											value=&quot;${rs.artclNm}&quot; /&gt;&lt;/label&gt;
+									&lt;form:hidden path=&quot;artclCd&quot; value=&quot;${rs.artclCd}&quot; /&gt;
+								&lt;/p&gt;
+								&lt;div class=&quot;switch_box&quot;&gt;
+									&lt;strong&gt;&lt;input type=&quot;checkbox&quot; name=&quot;useYn&quot;
+										id=&quot;useYn_${rs.artclCd}&quot; value=&quot;Y&quot;
+										${useYn eq &#x27;Y&#x27; ? &#x27;checked&#x27; : &#x27;&#x27;}&gt;&lt;/strong&gt; &lt;label
+										class=&quot;switch&quot;&gt; &lt;input type=&quot;checkbox&quot;
+										class=&quot;switch-input&quot; name=&quot;esntlYn&quot; id=&quot;esntlYn_${rs.artclCd}&quot;
+										value=&quot;Y&quot; ${esntlYn eq &#x27;Y&#x27; ? &#x27;checked&#x27; : &#x27;&#x27;}&gt; &lt;span
+										class=&quot;switch-label&quot; data-on=&quot;필수&quot; data-off=&quot;선택&quot;&gt;&lt;/span&gt; &lt;span
+										class=&quot;switch-handle&quot;&gt;&lt;/span&gt;
+									&lt;/label&gt;
+								&lt;/div&gt;
+							&lt;/div&gt;
+						&lt;/c:forEach&gt;
+
+						&lt;!-- 개인정보 동의 활용 기간 --&gt;
+						&lt;div class=&quot;join_infoBox&quot;&gt;
+							&lt;p class=&quot;join_title&quot;&gt;
+								&lt;i class=&quot;xi-file-text-o&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;개인정보 동의 활용 기간&lt;br&gt;
+								&lt;span class=&quot;f_red&quot;&gt;※ 접수종료 날짜 기준 3개월 또는 6개월이 지나면 자동으로
+									개인정보가 삭제됩니다.&lt;/span&gt;
+							&lt;/p&gt;
+							&lt;div class=&quot;switch_box&quot;&gt;
+								&lt;label class=&quot;switch&quot; id=&quot;switch9&quot;&gt; &lt;input
+									type=&quot;checkbox&quot; class=&quot;switch-input&quot; name=&quot;prvcStrgTermCd&quot;
+									${privacyPolicy.prvcStrgTermCd eq &#x27;E01A06A01&#x27; ? &#x27;checked&#x27; : &#x27;&#x27;}&gt;
+									&lt;span class=&quot;switch-label switch-label2&quot; data-on=&quot;3개월&quot;
+									data-off=&quot;6개월&quot;&gt;&lt;/span&gt; &lt;span class=&quot;switch-handle&quot;&gt;&lt;/span&gt;
+								&lt;/label&gt;
+							&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;
+
+					&lt;div class=&quot;peros_info_tex_box&quot;&gt;
+						&lt;div class=&quot;sub_title&quot;&gt;
+							&lt;h3&gt;개인정보 수집 및 이용 내용&lt;/h3&gt;
+						&lt;/div&gt;
+						&lt;div class=&quot;table_con_box&quot;&gt;
+							&lt;div class=&quot;table_con_text&quot;&gt;
+								&lt;c:if test=&quot;${not empty privacyPolicy.prvcPlcyCn}&quot;&gt;
+									&lt;textarea class=&quot;text_area_box&quot; id=&quot;textarea1&quot;&gt;${privacyPolicy.prvcPlcyCn}&lt;/textarea&gt;
+								&lt;/c:if&gt;
+								&lt;c:if test=&quot;${empty privacyPolicy.prvcPlcyCn}&quot;&gt;
+									&lt;textarea class=&quot;text_area_box&quot; id=&quot;textarea1&quot;&gt;
+ㆍ 개인정보 수집 목적 : 예시) 대한민국과학창의축전 행사 참여자 선정
+ㆍ 수집하는 개인정보 항목 : (예시) (필수) 신청자 이름, 생년월일, 이메일 (선택) 휴대전화번호, 전화번호
+* 신청폼에서 수집하는 개인정보 이름과 동일하게 기입하시기 바랍니다. ( 예: 신청폼 이메일이면 항목에도 이메일로 표기(E-mail X) )
+ㆍ 개인정보 보유기간 : (예시) 3개월 또는 6개월
+ㆍ 신청인은 개인정보 수집 및 활용 동의를 거부할 수 있으나, 동의거부시 신청을 할 수 없습니다.
+&lt;/textarea&gt;
+								&lt;/c:if&gt;
+								&lt;div class=&quot;form_check&quot;&gt;
+									&lt;input type=&quot;checkbox&quot; id=&quot;checkbox1&quot; name=&quot;checkbox1&quot;
+										${privacyPolicy.prvcClctAgreYn eq &#x27;Y&#x27; ? &#x27;checked&#x27; : &#x27;&#x27;}&gt;
+									&lt;label for=&quot;checkbox1&quot;&gt;개인정보 수집 및 이용 내용을 확인 및 수정했습니다.&lt;/label&gt;
+								&lt;/div&gt;
+							&lt;/div&gt;
+						&lt;/div&gt;
+
+					&lt;/div&gt;
+				&lt;/div&gt;
+			&lt;/form:form&gt;
+
+		&lt;/div&gt;
+
+
+		&lt;div class=&quot;sub_con_box&quot;&gt;
+			&lt;div class=&quot;sub_title&quot;&gt;
+				&lt;h2&gt;
+					응답항목 설정
+					&lt;button type=&quot;button&quot; class=&quot;app_btn&quot;&gt;추가&lt;/button&gt;
+				&lt;/h2&gt;
+			&lt;/div&gt;
+
+			&lt;div class=&quot;response_writing_wrap&quot;&gt;
+				&lt;div class=&quot;response_writing_area&quot;&gt;
+					&lt;c:if test=&quot;${not empty qitemConfig}&quot;&gt;
+						&lt;c:forEach var=&quot;qitem&quot; items=&quot;${qitemConfig}&quot; varStatus=&quot;status&quot;&gt;
+							&lt;div class=&quot;re_wr_box&quot; id=&quot;${qitem.qitemId}&quot;&gt;
+								&lt;div class=&quot;re_wr_box_move&quot; style=&quot;display: none;&quot;&gt;
+									&lt;i class=&quot;&quot;&gt;&lt;/i&gt;
+									&lt;div class=&quot;jb-text&quot;&gt;
+										&lt;p&gt;드래그이동&lt;/p&gt;
+									&lt;/div&gt;
+								&lt;/div&gt;
+								&lt;div class=&quot;choice_sel_box&quot;&gt;
+									&lt;div class=&quot;choice_sel&quot;&gt;
+										&lt;div class=&quot;choice_sel_active&quot;
+											data-type=&quot;${qitem.qitemTypeNm}&quot; data-id=&quot;${qitem.qitemId}&quot;&gt;
+											&lt;c:choose&gt;
+												&lt;c:when test=&quot;${qitem.qitemTypeCd eq &#x27;E01A05A01&#x27;}&quot;&gt;
+													&lt;i class=&quot;xi-drag-handle&quot;&gt;&lt;/i&gt;단답형
+												&lt;/c:when&gt;
+												&lt;c:when test=&quot;${qitem.qitemTypeCd eq &#x27;E01A05A02&#x27;}&quot;&gt;
+													&lt;i class=&quot;xi-align-left&quot;&gt;&lt;/i&gt;장문형
+												&lt;/c:when&gt;
+												&lt;c:when test=&quot;${qitem.qitemTypeCd eq &#x27;E01A05A03&#x27;}&quot;&gt;
+													&lt;i class=&quot;xi-radiobox-checked&quot;&gt;&lt;/i&gt;객관식 질문
+												&lt;/c:when&gt;
+												&lt;c:when test=&quot;${qitem.qitemTypeCd eq &#x27;E01A05A04&#x27;}&quot;&gt;
+													&lt;i class=&quot;xi-check-square-o&quot;&gt;&lt;/i&gt;체크박스
+												&lt;/c:when&gt;
+												&lt;c:when test=&quot;${qitem.qitemTypeCd eq &#x27;E01A05A05&#x27;}&quot;&gt;
+													&lt;i class=&quot;xi-caret-down-min&quot;&gt;&lt;/i&gt;드롭다운
+												&lt;/c:when&gt;
+												&lt;c:when test=&quot;${qitem.qitemTypeCd eq &#x27;E01A05A06&#x27;}&quot;&gt;
+													&lt;i class=&quot;xi-cloud-upload-o&quot;&gt;&lt;/i&gt;파일 업로드
+												&lt;/c:when&gt;
+											&lt;/c:choose&gt;
+										&lt;/div&gt;
+										&lt;div class=&quot;switch_box&quot;&gt;
+											&lt;strong&gt;필수&lt;/strong&gt; &lt;label class=&quot;switch&quot;&gt; &lt;input
+												type=&quot;checkbox&quot; class=&quot;switch-input&quot;
+												${qitem.esntlYn eq &#x27;Y&#x27; ? &#x27;checked&#x27; : &#x27;&#x27;}&gt; &lt;span
+												class=&quot;switch-label&quot; data-on=&quot;필수&quot; data-off=&quot;선택&quot;&gt;&lt;/span&gt; &lt;span
+												class=&quot;switch-handle&quot;&gt;&lt;/span&gt;
+											&lt;/label&gt;
+										&lt;/div&gt;
+										&lt;div class=&quot;choice_sel_list&quot; style=&quot;display: none;&quot;&gt;
+											&lt;div&gt;
+												&lt;button type=&quot;button&quot; data-type=&quot;subjective&quot;&gt;
+													&lt;i class=&quot;xi-drag-handle&quot;&gt;&lt;/i&gt;단답형
+												&lt;/button&gt;
+												&lt;button type=&quot;button&quot; data-type=&quot;long&quot;&gt;
+													&lt;i class=&quot;xi-align-left&quot;&gt;&lt;/i&gt;장문형
+												&lt;/button&gt;
+											&lt;/div&gt;
+											&lt;div&gt;
+												&lt;button type=&quot;button&quot; data-type=&quot;objective&quot;&gt;
+													&lt;i class=&quot;xi-radiobox-checked&quot;&gt;&lt;/i&gt;객관식 질문
+												&lt;/button&gt;
+												&lt;button type=&quot;button&quot; data-type=&quot;checkbox&quot;&gt;
+													&lt;i class=&quot;xi-check-square-o&quot;&gt;&lt;/i&gt;체크박스
+												&lt;/button&gt;
+											&lt;/div&gt;
+											&lt;div&gt;
+												&lt;button type=&quot;button&quot; data-type=&quot;file&quot;&gt;
+													&lt;i class=&quot;xi-cloud-upload-o&quot;&gt;&lt;/i&gt;파일 업로드
+												&lt;/button&gt;
+											&lt;/div&gt;
+										&lt;/div&gt;
+									&lt;/div&gt;
+									&lt;div class=&quot;choice_sel_util&quot;&gt;
+										&lt;button type=&quot;button&quot; class=&quot;duplicate-box&quot;&gt;
+											&lt;i class=&quot;xi-documents-o&quot;&gt;&lt;/i&gt;
+											&lt;div class=&quot;jb-text&quot;&gt;
+												&lt;p&gt;질문 복제&lt;/p&gt;
+											&lt;/div&gt;
+										&lt;/button&gt;
+										&lt;button type=&quot;button&quot; class=&quot;delete-box&quot;&gt;
+											&lt;i class=&quot;xi-trash-o&quot;&gt;&lt;/i&gt;
+											&lt;div class=&quot;jb-text&quot;&gt;
+												&lt;p&gt;질문 삭제&lt;/p&gt;
+											&lt;/div&gt;
+										&lt;/button&gt;
+									&lt;/div&gt;
+								&lt;/div&gt;
+								&lt;div class=&quot;choice_text_wrap&quot;&gt;
+									&lt;div class=&quot;choice_text_title&quot;&gt;
+										&lt;textarea class=&quot;question-title&quot; placeholder=&quot;질문을 입력해주세요.&quot;
+											maxlength=&quot;2000&quot;&gt;&lt;c:out value=&quot;${qitem.qitemCn}&quot; /&gt;&lt;/textarea&gt;
+									&lt;/div&gt;
+									&lt;div class=&quot;choice_text_con&quot;&gt;
+										&lt;c:choose&gt;
+											&lt;%-- 단답형 --%&gt;
+											&lt;c:when test=&quot;${qitem.qitemTypeCd eq &#x27;E01A05A01&#x27;}&quot;&gt;
+												&lt;ul&gt;
+													&lt;li&gt;&lt;label&gt;최대 글자 수: &lt;/label&gt; &lt;select
+														class=&quot;text-limit w20&quot; name=&quot;text_limit&quot;&gt;
+															&lt;c:forEach var=&quot;i&quot; begin=&quot;1&quot; end=&quot;15&quot; step=&quot;1&quot;&gt;
+																&lt;option value=&quot;${i*100}&quot;
+																	${qitem.maxLen eq i*100 ? &#x27;selected&#x27; : &#x27;&#x27;}&gt;${i*100}자&lt;/option&gt;
+															&lt;/c:forEach&gt;
+													&lt;/select&gt;&lt;/li&gt;
+												&lt;/ul&gt;
+											&lt;/c:when&gt;
+											&lt;%-- 장문형 --%&gt;
+											&lt;c:when test=&quot;${qitem.qitemTypeCd eq &#x27;E01A05A02&#x27;}&quot;&gt;
+												&lt;ul&gt;
+													&lt;li&gt;&lt;label&gt;최대 글자 수: &lt;/label&gt; &lt;select
+														class=&quot;text-limit w20&quot; name=&quot;text_limit&quot;&gt;
+															&lt;c:forEach var=&quot;i&quot; begin=&quot;1&quot; end=&quot;15&quot; step=&quot;1&quot;&gt;
+																&lt;option value=&quot;${i*100}&quot;
+																	${qitem.maxLen eq i*100 ? &#x27;selected&#x27; : &#x27;&#x27;}&gt;${i*100}자&lt;/option&gt;
+															&lt;/c:forEach&gt;
+													&lt;/select&gt;&lt;/li&gt;
+												&lt;/ul&gt;
+											&lt;/c:when&gt;
+											&lt;%-- 객관식 --%&gt;
+											&lt;c:when test=&quot;${qitem.qitemTypeCd eq &#x27;E01A05A03&#x27;}&quot;&gt;
+												&lt;div class=&quot;choice_text_radio&quot;&gt;
+													&lt;ul&gt;
+														&lt;c:forEach var=&quot;option&quot; items=&quot;${qitemQuestions}&quot;
+															varStatus=&quot;optStatus&quot;&gt;
+															&lt;c:if test=&quot;${option.qitemId eq qitem.qitemId}&quot;&gt;
+																&lt;li&gt;&lt;input type=&quot;text&quot; class=&quot;option-text&quot;
+																	placeholder=&quot;선택항목${optStatus.count}&quot;
+																	value=&quot;${option.anschcCn}&quot; data-id=&quot;${option.anschcId}&quot;
+																	maxlength=&quot;80&quot;&gt;
+																	&lt;button type=&quot;button&quot; class=&quot;delete-option&quot;&gt;
+																		&lt;i class=&quot;xi-trash-o&quot;&gt;&lt;/i&gt;
+																	&lt;/button&gt;&lt;/li&gt;
+															&lt;/c:if&gt;
+														&lt;/c:forEach&gt;
+													&lt;/ul&gt;
+												&lt;/div&gt;
+												&lt;div class=&quot;choice_text_btn&quot;&gt;
+													&lt;button type=&quot;button&quot; class=&quot;btn_base bg_gray add-option&quot;&gt;선택항목
+														추가&lt;/button&gt;
+												&lt;/div&gt;
+											&lt;/c:when&gt;
+											&lt;%-- 체크박스 --%&gt;
+											&lt;c:when test=&quot;${qitem.qitemTypeCd eq &#x27;E01A05A04&#x27;}&quot;&gt;
+												&lt;div class=&quot;choice_text_check&quot;&gt;
+													&lt;ul&gt;
+														&lt;c:forEach var=&quot;option&quot; items=&quot;${qitemQuestions}&quot;
+															varStatus=&quot;optStatus&quot;&gt;
+															&lt;c:if test=&quot;${option.qitemId eq qitem.qitemId}&quot;&gt;
+																&lt;li&gt;&lt;input type=&quot;text&quot; class=&quot;option-text&quot;
+																	placeholder=&quot;체크항목${optStatus.count}&quot;
+																	value=&quot;${option.anschcCn}&quot; data-id=&quot;${option.anschcId}&quot;
+																	maxlength=&quot;80&quot;&gt;
+																	&lt;button type=&quot;button&quot; class=&quot;delete-option&quot;&gt;
+																		&lt;i class=&quot;xi-trash-o&quot;&gt;&lt;/i&gt;
+																	&lt;/button&gt;&lt;/li&gt;
+															&lt;/c:if&gt;
+														&lt;/c:forEach&gt;
+													&lt;/ul&gt;
+												&lt;/div&gt;
+												&lt;div class=&quot;choice_text_btn&quot;&gt;
+													&lt;button type=&quot;button&quot; class=&quot;btn_base bg_gray add-option&quot;&gt;선택항목
+														추가&lt;/button&gt;
+												&lt;/div&gt;
+												&lt;div class=&quot;checkbox-limit-wrap mt10&quot;&gt;
+													&lt;label&gt;체크 가능 개수: &lt;/label&gt; &lt;select
+														class=&quot;checkbox-limit w20&quot; name=&quot;checkbox_limit&quot;&gt;
+														&lt;c:forEach var=&quot;i&quot; begin=&quot;1&quot; end=&quot;${qitem.maxChcCnt}&quot;
+															step=&quot;1&quot;&gt;
+															&lt;c:set var=&quot;iStr&quot; value=&quot;${i}&quot; /&gt;
+															&lt;option value=&quot;${iStr}&quot;
+																${qitem.maxChcCnt == iStr ? &#x27;selected&#x27; : &#x27;&#x27;}&gt;${iStr}개&lt;/option&gt;
+														&lt;/c:forEach&gt;
+													&lt;/select&gt;
+												&lt;/div&gt;
+											&lt;/c:when&gt;
+											&lt;%-- 파일 업로드 --%&gt;
+											&lt;c:when test=&quot;${qitem.qitemTypeCd eq &#x27;E01A05A06&#x27;}&quot;&gt;
+												&lt;ul&gt;
+													&lt;li&gt;&lt;input type=&quot;text&quot; class=&quot;file-extn-lmt&quot;
+														placeholder=&quot;(미입력시 전체) 업로드 가능한 확장자를 입력해주세요. ex) ppt, zip&quot;
+														value=&quot;${qitem.fileExtnLmt}&quot; maxlength=&quot;80&quot;&gt;&lt;/li&gt;
+												&lt;/ul&gt;
+											&lt;/c:when&gt;
+										&lt;/c:choose&gt;
+									&lt;/div&gt;
+								&lt;/div&gt;
+							&lt;/div&gt;
+						&lt;/c:forEach&gt;
+					&lt;/c:if&gt;
+
+				&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+
+		&lt;div class=&quot;sub_con_box&quot;&gt;
+			&lt;div class=&quot;btn_move_box&quot;&gt;
+				&lt;a href=&quot;&lt;c:url value=&quot;/survey/onlnRcpt/onlnRcptList.do&quot; /&gt;&quot;
+					class=&quot;bg_gray&quot;&gt;목록으로&lt;/a&gt;
+				&lt;c:if test=&quot;${not IS_PRIVACY_OFFICER}&quot;&gt;
+					&lt;c:if test=&quot;${empty resultVO.picYn || resultVO.picYn eq &#x27;Y&#x27;}&quot;&gt;
+						&lt;c:if test=&quot;${fn:contains(referer, &#x27;addPbancInfoStng.do&#x27;)}&quot;&gt;
+							&lt;a href=&quot;#&quot; class=&quot;bg_blue&quot; id=&quot;btnSave&quot;&gt;저장&lt;/a&gt;
+						&lt;/c:if&gt;
+					&lt;/c:if&gt;
+					&lt;a href=&quot;#&quot; class=&quot;bg_green&quot; id=&quot;btnPrev&quot;&gt;미리보기&lt;/a&gt;
+					&lt;c:if
+						test=&quot;${(resultVO.frccsYn eq &#x27;N&#x27; || resultVO.frccsYn eq null)
+						&amp;&amp; resultVO.picYn eq &#x27;Y&#x27;}&quot;&gt;
+						&lt;c:if test=&quot;${fn:contains(referer, &#x27;addPbancInfoStng.do&#x27;)}&quot;&gt;
+							&lt;c:if
+								test=&quot;${resultVO.aprvSttsCd eq &#x27;E01A02A01&#x27;
+												|| resultVO.aprvSttsCd eq &#x27;E01A02A02&#x27;}&quot;&gt;
+								&lt;a href=&quot;#&quot; class=&quot;bg_blue&quot; id=&quot;btnAprvAply&quot;&gt;승인 절차 신청&lt;/a&gt;
+							&lt;/c:if&gt;
+						&lt;/c:if&gt;
+					&lt;/c:if&gt;
+				&lt;/c:if&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+
+	&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;style&gt;
+/* 드래그 앤 드롭 관련 스타일 */
+.sort-placeholder {
+	border: 2px dashed #ccc;
+	margin: 10px 0;
+	height: 100px;
+	background: #f9f9f9;
+}
+
+.re_wr_box_move {
+	cursor: move;
+	padding: 5px;
+	background: #f5f5f5;
+	border-radius: 3px;
+	margin-bottom: 5px;
+}
+
+.re_wr_box_move:hover {
+	background: #e9e9e9;
+}
+&lt;/style&gt;</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
